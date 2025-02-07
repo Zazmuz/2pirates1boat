@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D _rb;
 
-    private Vector2 _moveVelocity;
+    public Vector2 MoveVelocity {get; set;}
     private bool _isFacingRight;
 
     private RaycastHit2D _groundHit;
@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     //jump variables
-    public float VerticalVelocity {get; private set;}
+    public float VerticalVelocity {get; set;}
     private bool _isJumping;
     private bool _isFastFalling;
     private bool _isFalling;
@@ -40,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
     //coyote time variables
     private float _coyoteTimer;
 
+    //Ladder checks
+    private LadderMovement lm;
 
     private void Update(){
         CountTimers();
@@ -52,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate(){
         CollisionChecks();
+        
         Jump();
 
         if(_isGrounded){
@@ -77,12 +80,12 @@ public class PlayerMovement : MonoBehaviour
                 targetVelocity = new UnityEngine.Vector2(moveInput.x,0f) * MoveStats.MaxWalkSpeed;
             }
 
-            _moveVelocity = UnityEngine.Vector2.Lerp(_moveVelocity,targetVelocity, acceleration * Time.fixedDeltaTime);
-            _rb.velocity = new UnityEngine.Vector2(_moveVelocity.x, _rb.velocity.y);
+            MoveVelocity = UnityEngine.Vector2.Lerp(MoveVelocity,targetVelocity, acceleration * Time.fixedDeltaTime);
+            _rb.velocity = new UnityEngine.Vector2(MoveVelocity.x, _rb.velocity.y);
         }
         else if(moveInput == UnityEngine.Vector2.zero){
-            _moveVelocity = UnityEngine.Vector2.Lerp(_moveVelocity, UnityEngine.Vector2.zero, deacceleration * Time.fixedDeltaTime);
-            _rb.velocity = new UnityEngine.Vector2(_moveVelocity.x, _rb.velocity.y);
+            MoveVelocity = UnityEngine.Vector2.Lerp(MoveVelocity, UnityEngine.Vector2.zero, deacceleration * Time.fixedDeltaTime);
+            _rb.velocity = new UnityEngine.Vector2(MoveVelocity.x, _rb.velocity.y);
         }
     }
 
@@ -113,11 +116,9 @@ public class PlayerMovement : MonoBehaviour
         if(InputManager.JumpWasPressed){
             _jumpBufferTimer = MoveStats.JumpBufferTime;
             _jumpReleasedDuringBuffer = false;
-            Debug.Log("Jumper");
         }
 
         if(InputManager.JumpWasReleased){
-            //Debug.Log("Jump released");
             if(_jumpBufferTimer > 0f){
                 _jumpReleasedDuringBuffer = true;   
             }
@@ -134,10 +135,7 @@ public class PlayerMovement : MonoBehaviour
 
             }
         }
-
-        //Debug.Log($"Jump Buffer: {_jumpBufferTimer}, Is Jumping: {_isJumping}, Is Grounded: {_isGrounded}, Coyote Timer: {_coyoteTimer}");
         if(_jumpBufferTimer > 0f && !_isJumping && (_isGrounded || _coyoteTimer > 0f)){
-            Debug.Log("Jump started!");
             InitiateJump(1);
 
             if(_jumpReleasedDuringBuffer){
@@ -235,12 +233,10 @@ public class PlayerMovement : MonoBehaviour
         //clamp fall speeeeeed
 
         VerticalVelocity = Mathf.Clamp(VerticalVelocity, -MoveStats.MaxFallSpeed, 50f);
-        Debug.Log(VerticalVelocity);
         _rb.velocity = new Vector2(_rb.velocity.x, VerticalVelocity);
     }
 
     private void InitiateJump(int numberOfJumpsUsed){
-        Debug.Log("is jumping");
         if(!_isJumping){
             _isJumping = true;
         }
@@ -258,7 +254,6 @@ public class PlayerMovement : MonoBehaviour
 
         _groundHit = Physics2D.BoxCast(boxCastOrigin, boxCastSize, 0f, Vector2.down, MoveStats.GroundDetectionRayLength, MoveStats.GroundLayer);
         if(_groundHit.collider != null){
-            Debug.Log("grounded");
             _isGrounded = true;
 
         }else{
