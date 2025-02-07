@@ -56,6 +56,10 @@ public class PlayerMovementStats : ScriptableObject
     [Range(5, 100)] public int ArcResolution = 20;
     [Range(0, 500)] public int VisualizationSteps = 90;
 
+    [Header("Ladders")]
+    public float VerticalClimbSpeed = 8f;
+    public float HorizontalClimbSpeed = 8f;
+
     public float Gravity {get; private set; }
     public float InitialJumpVelocity{get; private set; }
     public float AdjustedJumpHeight{get; private set;}

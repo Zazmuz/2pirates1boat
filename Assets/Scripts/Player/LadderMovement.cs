@@ -1,14 +1,14 @@
 using UnityEngine;
 
 public class LadderMovement : MonoBehaviour {
-    private float verticalSpeed = 8f;
-    private float horizontalSpeed = 8f;
     private bool isLadder;
-    public bool isClimbing;
+    private bool isClimbing;
     private PlayerMovement _pm;
-    
-    [SerializeField] private Rigidbody2D _rb;
+
+    [Header("References")]
     [SerializeField] private PlayerMovementStats PlayerStats;
+    [SerializeField] private Rigidbody2D _rb;
+    
 
     public void Awake() {
         _pm = GetComponent<PlayerMovement>();
@@ -27,10 +27,10 @@ public class LadderMovement : MonoBehaviour {
 
     private void FixedUpdate() {
         if (isClimbing) {
-            _rb.velocity = new Vector2(InputManager.Movement.x * horizontalSpeed, InputManager.Movement.y * verticalSpeed);
+            _rb.velocity = new Vector2(InputManager.Movement.x * PlayerStats.HorizontalClimbSpeed, InputManager.Movement.y * PlayerStats.VerticalClimbSpeed);
         } 
         else if (isLadder) {
-            _rb.velocity = new Vector2(InputManager.Movement.x * horizontalSpeed, -verticalSpeed * 0.5f);
+            _rb.velocity = new Vector2(InputManager.Movement.x * PlayerStats.HorizontalClimbSpeed, -PlayerStats.VerticalClimbSpeed * 0.5f);
         }
     }
 

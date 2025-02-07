@@ -40,9 +40,6 @@ public class PlayerMovement : MonoBehaviour
     //coyote time variables
     private float _coyoteTimer;
 
-    //Ladder checks
-    private LadderMovement lm;
-
     private void Update(){
         CountTimers();
         JumpChecks();
@@ -65,31 +62,30 @@ public class PlayerMovement : MonoBehaviour
     }
 
     #region Movement
-    
 
-    private void Move(float acceleration, float deacceleration, UnityEngine.Vector2 moveInput){
-        if(moveInput != UnityEngine.Vector2.zero){
+    private void Move(float acceleration, float deacceleration, Vector2 moveInput){
+        if(moveInput != Vector2.zero){
 
             TurnCheck(moveInput);
 
-            UnityEngine.Vector2 targetVelocity = UnityEngine.Vector2.zero;
+            Vector2 targetVelocity = Vector2.zero;
             if(InputManager.RunIsHeld){
-                targetVelocity = new UnityEngine.Vector2(moveInput.x, 0f) * MoveStats.MaxRunSpeed;
+                targetVelocity = new Vector2(moveInput.x, 0f) * MoveStats.MaxRunSpeed;
             }
             else{
-                targetVelocity = new UnityEngine.Vector2(moveInput.x,0f) * MoveStats.MaxWalkSpeed;
+                targetVelocity = new Vector2(moveInput.x,0f) * MoveStats.MaxWalkSpeed;
             }
 
-            MoveVelocity = UnityEngine.Vector2.Lerp(MoveVelocity,targetVelocity, acceleration * Time.fixedDeltaTime);
-            _rb.velocity = new UnityEngine.Vector2(MoveVelocity.x, _rb.velocity.y);
+            MoveVelocity = Vector2.Lerp(MoveVelocity,targetVelocity, acceleration * Time.fixedDeltaTime);
+            _rb.velocity = new Vector2(MoveVelocity.x, _rb.velocity.y);
         }
-        else if(moveInput == UnityEngine.Vector2.zero){
-            MoveVelocity = UnityEngine.Vector2.Lerp(MoveVelocity, UnityEngine.Vector2.zero, deacceleration * Time.fixedDeltaTime);
-            _rb.velocity = new UnityEngine.Vector2(MoveVelocity.x, _rb.velocity.y);
+        else if(moveInput == Vector2.zero){
+            MoveVelocity = Vector2.Lerp(MoveVelocity, Vector2.zero, deacceleration * Time.fixedDeltaTime);
+            _rb.velocity = new Vector2(MoveVelocity.x, _rb.velocity.y);
         }
     }
 
-    private void TurnCheck(UnityEngine.Vector2 moveInput){
+    private void TurnCheck(Vector2 moveInput){
         if(_isFacingRight && moveInput.x < 0){
             Turn(false);
         }
