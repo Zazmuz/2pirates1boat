@@ -235,9 +235,10 @@ GameObject:
   - component: {fileID: 122873152}
   - component: {fileID: 122873153}
   - component: {fileID: 122873155}
+  - component: {fileID: 122873156}
   m_Layer: 0
-  m_Name: InteractZone
-  m_TagString: Interact
+  m_Name: GoldZone
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -355,6 +356,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.625, y: 0.44940954}
   m_EdgeRadius: 0
+--- !u!114 &122873156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122873151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5137b7aedd12e948819eee85c1c0c73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoneName: 
+  zoneStats: {fileID: 11400000, guid: f040dd2ce54a9074fbd0d9dcf42a36f5, type: 2}
 --- !u!1 &300282762
 GameObject:
   m_ObjectHideFlags: 0
@@ -1606,7 +1621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d06f3d4b0b0c4f4e814100c3916b146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progressBar: {fileID: 1005081519}
+  inZone: {fileID: 0}
 --- !u!1 &1705655539
 GameObject:
   m_ObjectHideFlags: 0
