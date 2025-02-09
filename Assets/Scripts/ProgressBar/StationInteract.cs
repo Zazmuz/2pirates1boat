@@ -14,18 +14,18 @@ public class StationInteract : MonoBehaviour
         }
     }
     private void OnTriggerEnter2D(Collider2D collision) {
-    if (collision.CompareTag("Interact")) {
-        Debug.Log("In interact zone");
+        if (collision.CompareTag("Interact")) {
+            Debug.Log("In interact zone");
 
-        inZone = collision.GetComponent<ZoneBehaviour>();
+            inZone = collision.GetComponent<ZoneBehaviour>();
 
-        if (inZone != null) {
-            inInteractZone = true;
-        } else {
-            Debug.LogWarning("No ZoneBehaviour found");
+            if (inZone != null) {
+                inInteractZone = true;
+            } else {
+                Debug.LogWarning("No ZoneBehaviour found");
+            }
         }
     }
-}
 
     private void OnTriggerExit2D(Collider2D collision) {
         if(collision.CompareTag("Interact")){
