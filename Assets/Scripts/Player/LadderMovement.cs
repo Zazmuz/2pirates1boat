@@ -4,6 +4,7 @@ public class LadderMovement : MonoBehaviour {
     private bool isLadder;
     private bool isClimbing;
     private PlayerMovement _pm;
+    InputManager inputManager;
 
     [Header("References")]
     [SerializeField] private PlayerMovementStats PlayerStats;
@@ -11,15 +12,16 @@ public class LadderMovement : MonoBehaviour {
     
 
     public void Awake() {
+        inputManager = GetComponentInChildren<InputManager>();
         _pm = GetComponent<PlayerMovement>();
         _rb = GetComponent<Rigidbody2D>();
     }
     void Update() {
-        if (isLadder && InputManager.Movement.y > 0f) {
+        if (isLadder && inputManager.Movement.y > 0f) {
             isClimbing = true;
             _pm.enabled = false;
         } 
-        else if (isClimbing && InputManager.Movement.y == 0) {
+        else if (isClimbing && inputManager.Movement.y == 0) {
             isClimbing = false;
             _rb.velocity = new Vector2(_rb.velocity.x, Mathf.Lerp(_rb.velocity.y, -PlayerStats.MaxFallSpeed * 0.5f, 0.1f));
         }
@@ -27,10 +29,10 @@ public class LadderMovement : MonoBehaviour {
 
     private void FixedUpdate() {
         if (isClimbing) {
-            _rb.velocity = new Vector2(InputManager.Movement.x * PlayerStats.HorizontalClimbSpeed, InputManager.Movement.y * PlayerStats.VerticalClimbSpeed);
+            _rb.velocity = new Vector2(inputManager.Movement.x * PlayerStats.HorizontalClimbSpeed, inputManager.Movement.y * PlayerStats.VerticalClimbSpeed);
         } 
         else if (isLadder) {
-            _rb.velocity = new Vector2(InputManager.Movement.x * PlayerStats.HorizontalClimbSpeed, -PlayerStats.VerticalClimbSpeed * 0.5f);
+            _rb.velocity = new Vector2(inputManager.Movement.x * PlayerStats.HorizontalClimbSpeed, -PlayerStats.VerticalClimbSpeed * 0.5f);
         }
     }
 

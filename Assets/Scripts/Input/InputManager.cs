@@ -1,20 +1,18 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-
 public class InputManager : MonoBehaviour
 {
-    public static PlayerInput PlayerInput;
+    public PlayerInput playerInput;
 
-    public static Vector2 Movement;
+    public Vector2 Movement;
 
     //booleans to keep track of happenings
-    public static bool JumpWasPressed;
-    public static bool JumpIsHeld;
-    public static bool RunIsHeld;
-    public static bool JumpWasReleased;
-    public static bool InteractWasPressed;
-    public static bool InteractIsHeld;
+    public bool JumpWasPressed;
+    public bool JumpIsHeld;
+    public bool RunIsHeld;
+    public bool JumpWasReleased;
+    public bool InteractWasPressed;
+    public bool InteractIsHeld;
 
 
     //inputaction 
@@ -24,12 +22,12 @@ public class InputManager : MonoBehaviour
     private InputAction _interactAction;
 
     public void Awake(){
-        PlayerInput = GetComponent<PlayerInput>();
+        playerInput = GetComponent<PlayerInput>();
 
-        _moveAction = PlayerInput.actions["Move"];
-        _jumpAction = PlayerInput.actions["Jump"];
-        _runAction = PlayerInput.actions["Run"];
-        _interactAction = PlayerInput.actions["Interact"];
+        _moveAction = playerInput.actions["Move"];
+        _jumpAction = playerInput.actions["Jump"];
+        _runAction = playerInput.actions["Run"];
+        _interactAction = playerInput.actions["Interact"];
 
     }
 

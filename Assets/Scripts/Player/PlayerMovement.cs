@@ -40,24 +40,26 @@ public class PlayerMovement : MonoBehaviour
     //coyote time variables
     private float _coyoteTimer;
 
+    private InputManager inputManager;
+
     private void Update(){
         CountTimers();
         JumpChecks();
     }
     private void Awake(){
+        inputManager = GetComponentInChildren<InputManager>(); // Each player gets their own input
         _isFacingRight = true;
         _rb = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate(){
         CollisionChecks();
-        
         Jump();
 
         if(_isGrounded){
-            Move(MoveStats.GroundAcceleration, MoveStats.GroundDeacceleration, InputManager.Movement);
+            Move(MoveStats.GroundAcceleration, MoveStats.GroundDeacceleration, inputManager.Movement);
         }else{
-            Move(MoveStats.AirAcceleration, MoveStats.AirDeacceleration, InputManager.Movement);
+            Move(MoveStats.AirAcceleration, MoveStats.AirDeacceleration, inputManager.Movement);
         }
     }
 
@@ -69,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
             TurnCheck(moveInput);
 
             Vector2 targetVelocity = Vector2.zero;
-            if(InputManager.RunIsHeld){
+            if(inputManager.RunIsHeld){
                 targetVelocity = new Vector2(moveInput.x, 0f) * MoveStats.MaxRunSpeed;
             }
             else{
@@ -109,12 +111,12 @@ public class PlayerMovement : MonoBehaviour
 
     //buffer stuff, collision checks and coyote timer
     private void JumpChecks(){
-        if(InputManager.JumpWasPressed){
+        if(inputManager.JumpWasPressed){
             _jumpBufferTimer = MoveStats.JumpBufferTime;
             _jumpReleasedDuringBuffer = false;
         }
 
-        if(InputManager.JumpWasReleased){
+        if(inputManager.JumpWasReleased){
             if(_jumpBufferTimer > 0f){
                 _jumpReleasedDuringBuffer = true;   
             }

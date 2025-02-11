@@ -15,16 +15,17 @@ public class HullBreachBehaviour : ZoneBehaviour
     //private Plank plank;
     private bool hasPlank; 
     private bool hasTool;
+    private InputManager inputManager;
     void Start(){
         zoneName = "Hull breach zone";
         tag = "Interact";
 
         progressBar = GetComponentInChildren<Slider>(); 
-        canvas =  GetComponentInChildren<Canvas>();
+        canvas = GetComponentInChildren<Canvas>();
         canvas.enabled = false;
     }
     public override void UniqueBehaviour(){
-        if (InputManager.InteractIsHeld && hasPlank && hasTool)
+        if (inputManager.InteractIsHeld && hasPlank && hasTool)
         {
             if (progressCoroutine == null) 
             {
