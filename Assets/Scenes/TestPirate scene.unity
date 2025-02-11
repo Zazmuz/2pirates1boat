@@ -370,7 +370,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zoneName: 
   zoneStats: {fileID: 11400000, guid: f040dd2ce54a9074fbd0d9dcf42a36f5, type: 2}
-  currentPlayerInput: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &300282762
 GameObject:
   m_ObjectHideFlags: 0
