@@ -177,6 +177,17 @@
                 },
                 {
                     "name": "",
+                    "id": "2b787482-aab8-40b9-8b6c-0af119153a33",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "WASD",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "ef015802-aa70-4653-8bf6-55815b3aec29",
                     "path": "<Keyboard>/f",
                     "interactions": "",

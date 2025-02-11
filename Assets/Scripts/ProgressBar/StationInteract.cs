@@ -1,21 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class StationInteract : MonoBehaviour
 {
     public ZoneBehaviour inZone;
     private bool inInteractZone;
-
+    private InputManager currentPlayerInput;
+    void Awake(){
+        currentPlayerInput = GetComponent<InputManager>();
+    }
     private void Update(){
         if(inInteractZone){
-            inZone.UniqueBehaviour();
+            Debug.Log("In interact zone");
+            inZone.UniqueBehaviour(currentPlayerInput);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Interact")) {
-            Debug.Log("In interact zone");
+            //Debug.Log("In interact zone");
 
             inZone = collision.GetComponent<ZoneBehaviour>();
 

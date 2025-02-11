@@ -39,7 +39,6 @@ public class LadderMovement : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Ladder")) {
             isLadder = true;
-            Debug.Log("Entered ladder area");
         }
     }
 
@@ -50,7 +49,6 @@ public class LadderMovement : MonoBehaviour {
             _pm.VerticalVelocity = _rb.velocity.y;
             _pm.MoveVelocity = new Vector2(_rb.velocity.x, _rb.velocity.y);
             _pm.enabled = true; 
-            Debug.Log("Exited ladder");
         }
     }
 }

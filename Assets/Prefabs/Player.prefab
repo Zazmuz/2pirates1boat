@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 2539242452365663778}
   - component: {fileID: 2043085097357904396}
   - component: {fileID: 793303121404003952}
+  - component: {fileID: 1127014660363379759}
+  - component: {fileID: 9065166261268505886}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -36,7 +38,6 @@ Transform:
   m_Children:
   - {fileID: 304581688948513951}
   - {fileID: 7585286949692611168}
-  - {fileID: 3310397926477602486}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2332698706394150115
@@ -160,46 +161,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inZone: {fileID: 0}
---- !u!1 &737310763233241195
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3310397926477602486}
-  - component: {fileID: 3001709886998927315}
-  - component: {fileID: 2821946321024269767}
-  m_Layer: 0
-  m_Name: InputManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3310397926477602486
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 737310763233241195}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.28563514, y: 0.12210743, z: -0.05456948}
-  m_LocalScale: {x: 0.125, y: 0.125, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2698056629151796001}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3001709886998927315
+--- !u!114 &1127014660363379759
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 737310763233241195}
+  m_GameObject: {fileID: 276682014506913379}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
@@ -275,13 +243,13 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &2821946321024269767
+--- !u!114 &9065166261268505886
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 737310763233241195}
+  m_GameObject: {fileID: 276682014506913379}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaa634b0b15615c41b24bed8a4e5db40, type: 3}

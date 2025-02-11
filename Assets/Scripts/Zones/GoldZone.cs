@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class GoldZone : ZoneBehaviour{
@@ -12,7 +13,8 @@ public class GoldZone : ZoneBehaviour{
     public ZoneStats zoneStats;
     private float interactionTime;
     private Coroutine progressCoroutine;
-    public InputManager currentPlayerInput; //to check which player is in the zone :3
+    public PlayerMovement player;
+    //public InputManager currentPlayerInput; //to check which player is in the zone :3
     
     void Start(){
         zoneName = "Gold Zone";
@@ -22,15 +24,10 @@ public class GoldZone : ZoneBehaviour{
         canvas =  GetComponentInChildren<Canvas>();
         canvas.enabled = false;
     }
-
-    private void OnTriggerEnter2D(Collider2D collision){
-        if(collision.CompareTag("Player")){
-            currentPlayerInput = collision.GetComponent<InputManager>();
-        }
-    }
-    public override void UniqueBehaviour(){
+    public override void UniqueBehaviour(InputManager currentPlayerInput){
 
         if (currentPlayerInput != null && currentPlayerInput.InteractIsHeld){
+            Debug.Log(currentPlayerInput);
             if (progressCoroutine == null) {
                 progressCoroutine = StartCoroutine(FillProgressBar());
             }

@@ -6,7 +6,7 @@ public class PlankZone : ZoneBehaviour{
     private PlayerItemManager player;
     private InputManager currentPlayerInput; //to check which player is in the zone :3
     
-    public override void UniqueBehaviour(){
+    public override void UniqueBehaviour(InputManager currentPlayerInput){
         if(currentPlayerInput.InteractWasPressed){
             if (player != null){
                     player.InitializeItem(item);
