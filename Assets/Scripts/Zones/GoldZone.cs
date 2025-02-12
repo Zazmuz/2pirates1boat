@@ -14,7 +14,7 @@ public class GoldZone : ZoneBehaviour{
     private float interactionTime;
     private Coroutine progressCoroutine;
     public PlayerMovement player;
-    //public InputManager currentPlayerInput; //to check which player is in the zone :3
+    public InputManager currentPlayerInZone; //to check which player is in the zone :3
     
     void Start(){
         zoneName = "Gold Zone";
@@ -26,8 +26,11 @@ public class GoldZone : ZoneBehaviour{
     }
     public override void UniqueBehaviour(InputManager currentPlayerInput){
 
-        if (currentPlayerInput != null && currentPlayerInput.InteractIsHeld){
-            Debug.Log(currentPlayerInput);
+        if(currentPlayerInZone == null){
+            currentPlayerInZone = currentPlayerInput;
+        }
+        if (currentPlayerInZone != null && currentPlayerInZone.InteractIsHeld){
+            Debug.Log(currentPlayerInZone);
             if (progressCoroutine == null) {
                 progressCoroutine = StartCoroutine(FillProgressBar());
             }
@@ -38,6 +41,7 @@ public class GoldZone : ZoneBehaviour{
                 progressCoroutine = null;
                 progressBar.value = 0f;
                 canvas.enabled = false;
+                currentPlayerInZone = null;
             }
         }
     }
@@ -58,5 +62,9 @@ public class GoldZone : ZoneBehaviour{
 
         progressBar.enabled = false;
         gameObject.SetActive(false);
+    }
+
+    public override void OnLeavingZone(){
+        currentPlayerInZone = null;
     }
 }

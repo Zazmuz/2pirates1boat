@@ -5,7 +5,12 @@ public class PlankZone : ZoneBehaviour{
     public Item item;
     private PlayerItemManager player;
     private InputManager currentPlayerInput; //to check which player is in the zone :3
-    
+
+    public override void OnLeavingZone()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void UniqueBehaviour(InputManager currentPlayerInput){
         if(currentPlayerInput.InteractWasPressed){
             if (player != null){

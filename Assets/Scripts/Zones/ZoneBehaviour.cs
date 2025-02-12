@@ -11,4 +11,5 @@ public abstract class ZoneBehaviour : MonoBehaviour
     }
 
     public abstract void UniqueBehaviour(InputManager currentPlayerInput);
+    public abstract void OnLeavingZone();
 }

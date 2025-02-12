@@ -28,7 +28,7 @@ using UnityEngine.InputSystem.Editor;
         private void OnEnable()
         {
             inputManager = target as SharedDeviceInputManager;
-            defaultEditor = UnityEditor.Editor.CreateEditor(inputManager as PlayerInputManager, typeof(PlayerInputManagerEditor));
+            defaultEditor = Editor.CreateEditor(inputManager as PlayerInputManager, typeof(PlayerInputManagerEditor));
         }
 
         /// <summary>

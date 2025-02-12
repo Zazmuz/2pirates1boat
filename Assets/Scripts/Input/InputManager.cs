@@ -3,7 +3,6 @@ using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
     public PlayerInput playerInput;
-
     public Vector2 Movement;
 
     //booleans to keep track of happenings
@@ -32,8 +31,7 @@ public class InputManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         Movement = _moveAction.ReadValue<Vector2>();
 
         JumpWasPressed = _jumpAction.WasPressedThisFrame();

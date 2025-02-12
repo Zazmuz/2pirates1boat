@@ -20,8 +20,6 @@ public class StationInteract : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Interact")) {
-            //Debug.Log("In interact zone");
-
             inZone = collision.GetComponent<ZoneBehaviour>();
 
             if (inZone != null) {
@@ -34,6 +32,7 @@ public class StationInteract : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision) {
         if(collision.CompareTag("Interact")){
+            inZone.OnLeavingZone();
             inInteractZone = false;
         }
     }
