@@ -19,8 +19,7 @@ public class InitilizePlayer : MonoBehaviour
         if(player != null){
             setSprite();
             setPlayerPosition();
-        } 
-        
+        }  
     }
     private void setPlayer(){
         switch(playerInput.currentControlScheme){

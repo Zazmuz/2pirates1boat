@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1127014660363379759}
   - component: {fileID: 9065166261268505886}
   - component: {fileID: 234058813732906009}
+  - component: {fileID: 5226683398449116752}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -33,7 +34,7 @@ Transform:
   m_GameObject: {fileID: 276682014506913379}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: -1, z: 0}
+  m_LocalPosition: {x: -2.2, y: -1, z: 0}
   m_LocalScale: {x: 8, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -278,6 +279,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1: {fileID: 11400000, guid: e7b95cc2523d483469ef500b61f5f2ee, type: 2}
   player2: {fileID: 11400000, guid: eeef4c3fec15cb8418ff98c6a244238f, type: 2}
+--- !u!114 &5226683398449116752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276682014506913379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a84b8df817227f8498707a823d1bef94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemSpriteRenderer: {fileID: 1775772310339666031}
+  item: {fileID: 0}
+  inventory:
+  - {fileID: 0}
 --- !u!1 &1266567310393971094
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,7 +404,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7585286949692611168}
-  - component: {fileID: 1085157006668028350}
   - component: {fileID: 1775772310339666031}
   m_Layer: 0
   m_Name: PlayerItemManager
@@ -411,22 +427,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2698056629151796001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1085157006668028350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4949462360746994417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a84b8df817227f8498707a823d1bef94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 0}
-  item: {fileID: 0}
-  inventory:
-  - {fileID: 0}
 --- !u!212 &1775772310339666031
 SpriteRenderer:
   m_ObjectHideFlags: 0
