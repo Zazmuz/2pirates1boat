@@ -16,8 +16,11 @@ public class InitilizePlayer : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerInput = GetComponent<PlayerInput>();
         setPlayer();
-        setSprite();
-        setPlayerPosition();
+        if(player != null){
+            setSprite();
+            setPlayerPosition();
+        } 
+        
     }
     private void setPlayer(){
         switch(playerInput.currentControlScheme){
@@ -27,6 +30,9 @@ public class InitilizePlayer : MonoBehaviour
             case "Arrows":
                 player = player2;
                 break;
+            default:
+                player = null;
+                break;
 
         }
         
@@ -35,7 +41,6 @@ public class InitilizePlayer : MonoBehaviour
         spriteRenderer.sprite = player.sprite;
     }
     private void setPlayerPosition(){
-        gameObject.position.x = player.posX;
-        gameObject.position.y = player.posY;
+        transform.position = new Vector2(player.posX, player.posY);
     }
 }
