@@ -8,4 +8,9 @@ public class PlayerInformation : ScriptableObject
     public Animation idle;
     public Animation running;
 
+    [Header("Gameplay and position")]
+    public float posX;
+    public float posY;
+    
+
 }

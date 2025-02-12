@@ -8,20 +8,34 @@ public class InitilizePlayer : MonoBehaviour
 {
     public PlayerInformation player1;
     public PlayerInformation player2;
+    private PlayerInformation player;
     private PlayerInput playerInput;
     private SpriteRenderer spriteRenderer;
-    // Start is called before the first frame update
-    void Start()
-    {
+    
+    void Start(){
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerInput = GetComponent<PlayerInput>();
+        setPlayer();
         setSprite();
+        setPlayerPosition();
+    }
+    private void setPlayer(){
+        switch(playerInput.currentControlScheme){
+            case "WASD":
+                player = player1;
+                break;
+            case "Arrows":
+                player = player2;
+                break;
+
+        }
+        
     }
     private void setSprite(){
-        if(playerInput.currentControlScheme == "WASD"){
-            spriteRenderer.sprite = player1.sprite;
-        }else if(playerInput.currentControlScheme == "Arrows"){
-            spriteRenderer.sprite = player2.sprite;
-        }
+        spriteRenderer.sprite = player.sprite;
+    }
+    private void setPlayerPosition(){
+        gameObject.position.x = player.posX;
+        gameObject.position.y = player.posY;
     }
 }

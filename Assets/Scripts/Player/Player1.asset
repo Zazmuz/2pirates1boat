@@ -15,3 +15,5 @@ MonoBehaviour:
   sprite: {fileID: 21300020, guid: 6fa7150d6e84a0f4d9122fda376c5e15, type: 3}
   idle: {fileID: 0}
   running: {fileID: 0}
+  posX: -4
+  posY: 5
