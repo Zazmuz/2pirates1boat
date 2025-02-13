@@ -20,6 +20,10 @@ public class PlayerItemManager : MonoBehaviour{
     public void DropHeldItem(){
         if(inventory[0] != null){
             inventory[0] = null;
+            itemSpriteRenderer.sprite = null;
         }
+    }
+    public Item GetHeldItem(){
+        return inventory[0];
     }
 }

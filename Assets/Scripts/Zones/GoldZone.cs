@@ -10,7 +10,6 @@ using UnityEngine.UI;
 public class GoldZone : ZoneBehaviour{
     private Slider progressBar;
     private Canvas canvas;
-    public ZoneStats zoneStats;
     private float interactionTime;
     private Coroutine progressCoroutine;
     public PlayerMovement player;

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Hammer
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 67a10d858fff5d64693fb132c0ea5615, type: 3}
+  itemName: Hammer
   itemType: 1
   ActionType: 2

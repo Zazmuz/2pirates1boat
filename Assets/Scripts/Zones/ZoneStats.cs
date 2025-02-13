@@ -3,10 +3,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New zone",menuName = "Zone Stats")]
 public class ZoneStats : ScriptableObject
 {
-    [Header("On interact")] //information related to hull breaches
-    [Range(1f,10f)] public float interactionTime = 5f;
+    [Header("Information")]
     public string zoneName;
-    public Item requiredItem;
+    [Range(1f,10f)] public float interactionTime = 5f;
+    public Sprite altSprite; //ig fuckup solution to change sprite when adding material or something
+    [Header("Items")]
+    public Item[] requiredItem;
     public Item givesItem;
+    [Header("Co-op")]
     public bool needsTwoPlayers;
 }

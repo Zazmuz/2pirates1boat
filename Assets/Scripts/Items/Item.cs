@@ -9,6 +9,7 @@ public class Item : ScriptableObject
 {
     [Header("Item Information")]
     public Sprite itemSprite;
+    public string itemName;
     public ItemType itemType;
     public ActionType ActionType;
 }

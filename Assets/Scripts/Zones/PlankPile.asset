@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionTime: 1
   zoneName: PlankPile
-  requiredItem: {fileID: 0}
+  requiredItem: []
   givesItem: {fileID: 11400000, guid: dc2e03a612e0f5c43a7b2545e4a0c4bc, type: 2}
   needsTwoPlayers: 0
