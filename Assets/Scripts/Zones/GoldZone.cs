@@ -51,7 +51,7 @@ public class GoldZone : ZoneBehaviour{
         progressBar.enabled = true;
         float elapsedTime = 0f;
         progressBar.value = 0f;
-        interactionTime = zoneStats.goldZoneInteractionTime;
+        interactionTime = zoneStats.interactionTime;
 
 
         while (elapsedTime < interactionTime){
