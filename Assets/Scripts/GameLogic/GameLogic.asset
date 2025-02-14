@@ -13,5 +13,9 @@ MonoBehaviour:
   m_Name: GameLogic
   m_EditorClassIdentifier: 
   timeTilDestination: 5
-  amountOfWater: 5
+  timeTilNewBreach: 2
+  numberOfHullBreaches: 5
+  maxHullBreaches: 5
+  amountOfWater: 1
+  isSpawningHullBreaches: 1
   isGameOver: 0

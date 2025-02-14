@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Linq;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class HullBreachZone : ZoneBehaviour
@@ -20,19 +17,18 @@ public class HullBreachZone : ZoneBehaviour
     {
         hasPlanks = false;
         zoneName = zoneStats.name;   
-        interactionTime = zoneStats.interactionTime;
-
+  
         spriteRenderer = GetComponent<SpriteRenderer>();
         canvas = GetComponentInChildren<Canvas>();
         progressBar = GetComponentInChildren<Slider>();
+        
         canvas.enabled = false;
     }
     public override void OnLeavingZone()
     {
         currentPlayerInZone = null;
     }
-    public override void UniqueBehaviour(InputManager currentPlayerInput)
-    {
+    public override void UniqueBehaviour(InputManager currentPlayerInput){
         if(currentPlayerInZone == null){
             currentPlayerInZone = currentPlayerInput;
         }
@@ -44,15 +40,17 @@ public class HullBreachZone : ZoneBehaviour
         }
         if (hasPlanks && currentPlayerInZone != null && currentPlayerInZone.InteractIsHeld && playerItemManager.GetHeldItem().name == "Hammer"){
             StartCoroutine(FillProgressBar());
+            gameInformation.numberOfHullBreaches--;
         }else{
-            StopAllCoroutines();
+            StopCoroutine(FillProgressBar());
         }
     }
     private void AddPlanks(){
         if(!hasPlanks && playerItemManager.GetHeldItem().name == "Plank"){
             hasPlanks = true;
             spriteRenderer.sprite = zoneStats.altSprite; //changes to the sprite with da planks
-            playerItemManager.DropHeldItem(); // TODO create drop method or smth
+
+            playerItemManager.DropHeldItem();
         }
     }
     private IEnumerator FillProgressBar(){     
@@ -69,7 +67,7 @@ public class HullBreachZone : ZoneBehaviour
         }
 
         progressBar.enabled = false;
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
-
+    
 }
