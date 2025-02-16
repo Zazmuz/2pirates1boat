@@ -12,8 +12,7 @@ public class HullBreachParent : MonoBehaviour
     private Dictionary<Transform, GameObject> spawnPointHullBreaches = new Dictionary<Transform, GameObject>();
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         gameInformation.numberOfHullBreaches = 0;
         gameInformation.maxHullBreaches = 5;
 
@@ -23,9 +22,6 @@ public class HullBreachParent : MonoBehaviour
     void Update(){
         if (gameInformation.isSpawningHullBreaches && !isSpawning){
             StartCoroutine(TimeToSpawnNewHullBreach());
-        }else{
-            //todo REMOVE THE FUCKING HULL BREACH THINGS
-            
         }
     }
 
@@ -69,8 +65,7 @@ public class HullBreachParent : MonoBehaviour
 
         List<Transform> availableSpawnPoints = new List<Transform>();
 
-        foreach (Transform spawnPoint in spawnPoints)
-        {
+        foreach (Transform spawnPoint in spawnPoints){
             if (!spawnPointHullBreaches.ContainsKey(spawnPoint))
             {
                 availableSpawnPoints.Add(spawnPoint);
@@ -103,6 +98,7 @@ public class HullBreachParent : MonoBehaviour
 
         if (spawnPointToRemove != null){
             spawnPointHullBreaches.Remove(spawnPointToRemove);
+            Debug.Log("HEY");
             gameInformation.numberOfHullBreaches--;
         }
     }

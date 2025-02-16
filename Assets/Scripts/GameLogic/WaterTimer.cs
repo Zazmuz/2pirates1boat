@@ -21,8 +21,7 @@ public class WaterTimer : MonoBehaviour
         StartCoroutine(ManageWaterLevel());
     }
 
-    private IEnumerator ManageWaterLevel()
-    {
+    private IEnumerator ManageWaterLevel(){
         while (true)
         {
             if (gameInformation.numberOfHullBreaches > 0){
@@ -42,6 +41,7 @@ public class WaterTimer : MonoBehaviour
     private void GameOver(){
         progressBar.enabled = false;
         gameInformation.isGameOver = true;
+        gameInformation.LoadGameOverScene();
         Debug.Log("Game Over! The ship is flooded.");
     }
 }

@@ -28,6 +28,9 @@ public class GameInformation : ScriptableObject{
         currentWater = 0f;
         isGameOver = false;
     }
+    public void LoadGameOverScene(){
+        SceneChanger.ChangeScene("Game Over");
+    }
 
 
 }

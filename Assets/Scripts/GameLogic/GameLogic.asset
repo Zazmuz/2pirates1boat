@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeTilDestination: 60
   timeTilNewBreach: 5
-  numberOfHullBreaches: 0
+  numberOfHullBreaches: 4
   maxHullBreaches: 5
   maxWater: 100
-  currentWater: 1
+  currentWater: 40.444202
   isSpawningHullBreaches: 1
   isGameOver: 0

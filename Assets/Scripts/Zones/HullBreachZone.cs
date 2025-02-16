@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Text;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HullBreachZone : ZoneBehaviour
 {
+    public HullBreachParent hullBreachParent;
     private Slider progressBar;
     private Canvas canvas;
     public PlayerMovement player;
@@ -15,6 +17,7 @@ public class HullBreachZone : ZoneBehaviour
     private SpriteRenderer spriteRenderer;
     private float interactionTime;
     private bool hasPlanks;
+    
     void Start()
     {
         hasPlanks = false;
@@ -23,6 +26,8 @@ public class HullBreachZone : ZoneBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         canvas = GetComponentInChildren<Canvas>();
         progressBar = GetComponentInChildren<Slider>();
+
+        hullBreachParent = GetComponentInParent<HullBreachParent>();
         
         canvas.enabled = false;
     }
@@ -82,6 +87,7 @@ public class HullBreachZone : ZoneBehaviour
         }
 
         progressBar.enabled = false;
+        hullBreachParent.RemoveHullBreach(gameObject);
         Destroy(gameObject);
     }
 
