@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class HullBreachZone : ZoneBehaviour
     private Canvas canvas;
     public PlayerMovement player;
     public InputManager currentPlayerInZone; //to check which player is in the zone :3
+    private Coroutine progressCoroutine;
     public GameInformation gameInformation;
     private PlayerItemManager playerItemManager;
     private SpriteRenderer spriteRenderer;
@@ -24,9 +26,14 @@ public class HullBreachZone : ZoneBehaviour
         
         canvas.enabled = false;
     }
-    public override void OnLeavingZone()
-    {
+    public override void OnLeavingZone(){
         currentPlayerInZone = null;
+        if(progressCoroutine != null){
+            StopCoroutine(progressCoroutine);
+            progressCoroutine = null;
+            ResetProgressBar();
+        }
+
     }
     public override void UniqueBehaviour(InputManager currentPlayerInput){
         if(currentPlayerInZone == null){
@@ -38,11 +45,19 @@ public class HullBreachZone : ZoneBehaviour
         if(currentPlayerInZone != null && currentPlayerInput.InteractWasPressed){
             AddPlanks();
         }
-        if (hasPlanks && currentPlayerInZone != null && currentPlayerInZone.InteractIsHeld && playerItemManager.GetHeldItem().name == "Hammer"){
-            StartCoroutine(FillProgressBar());
-            gameInformation.numberOfHullBreaches--;
-        }else{
-            StopCoroutine(FillProgressBar());
+        if (hasPlanks && currentPlayerInZone != null && currentPlayerInZone.InteractIsHeld){
+            if (playerItemManager.GetHeldItem() != null && playerItemManager.GetHeldItem().name == "Hammer"){
+                if(progressCoroutine == null){
+                    progressCoroutine = StartCoroutine(FillProgressBar());
+                }
+            }
+        }
+        else{
+            if (progressCoroutine != null){
+                StopCoroutine(progressCoroutine);
+                progressCoroutine = null;
+                ResetProgressBar();
+            }
         }
     }
     private void AddPlanks(){
@@ -69,5 +84,13 @@ public class HullBreachZone : ZoneBehaviour
         progressBar.enabled = false;
         Destroy(gameObject);
     }
-    
+
+    private void ResetProgressBar(){
+        if (progressBar != null)
+        {
+            progressBar.value = 0f;
+            canvas.enabled = false;
+            progressBar.enabled = false;
+        }
+    }
 }

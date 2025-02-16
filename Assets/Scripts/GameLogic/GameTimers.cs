@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-public class GameTimers : MonoBehaviour
-{
+public abstract class GameTimers : MonoBehaviour{
+    public GameInformation gameInformation;
 }

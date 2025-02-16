@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
     public bool JumpWasReleased;
     public bool InteractWasPressed;
     public bool InteractIsHeld;
+    public bool DropItemWasPressed;
 
 
     //inputaction 
@@ -19,6 +20,7 @@ public class InputManager : MonoBehaviour
     private InputAction _jumpAction;
     private InputAction _runAction;
     private InputAction _interactAction;
+    private InputAction _dropItemAction;
 
     public void Awake(){
         playerInput = GetComponent<PlayerInput>();
@@ -27,6 +29,7 @@ public class InputManager : MonoBehaviour
         _jumpAction = playerInput.actions["Jump"];
         _runAction = playerInput.actions["Run"];
         _interactAction = playerInput.actions["Interact"];
+        _dropItemAction = playerInput.actions["Drop Item"];
 
     }
 
@@ -40,6 +43,8 @@ public class InputManager : MonoBehaviour
 
         InteractWasPressed = _interactAction.WasPressedThisFrame();
         InteractIsHeld = _interactAction.IsPressed();
+
+        DropItemWasPressed = _dropItemAction.WasPressedThisFrame();
         
         RunIsHeld = _runAction.IsPressed();
     }

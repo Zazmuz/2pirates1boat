@@ -34,7 +34,6 @@ public class InitilizePlayer : MonoBehaviour
                 break;
 
         }
-        
     }
     private void setSprite(){
         spriteRenderer.sprite = player.sprite;
