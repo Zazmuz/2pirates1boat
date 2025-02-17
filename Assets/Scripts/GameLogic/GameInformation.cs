@@ -14,9 +14,14 @@ public class GameInformation : ScriptableObject{
     public bool isSpawningHullBreaches;
     [Header("Other shits")]
     public bool isGameOver;
+    public bool atDestination;
+    public bool gameStarted;
     
     public float GetCurrentWater(){
         return currentWater;
+    }
+    public void SetCurrentWater(float amount){
+        currentWater = amount;
     }
     public void ModifyWater(float amount)
     {
@@ -27,6 +32,7 @@ public class GameInformation : ScriptableObject{
         numberOfHullBreaches = 0;
         currentWater = 0f;
         isGameOver = false;
+        atDestination = false;
     }
     public void LoadGameOverScene(){
         SceneChanger.ChangeScene("Game Over");

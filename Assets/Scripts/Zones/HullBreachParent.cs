@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,9 @@ public class HullBreachParent : MonoBehaviour
     void Update(){
         if (gameInformation.isSpawningHullBreaches && !isSpawning){
             StartCoroutine(TimeToSpawnNewHullBreach());
+        }
+        if(gameInformation.atDestination){
+            RemoveAllBreaches();
         }
     }
 
@@ -74,7 +78,7 @@ public class HullBreachParent : MonoBehaviour
 
         if (gameInformation.numberOfHullBreaches < gameInformation.maxHullBreaches && availableSpawnPoints.Count > 0)
         {
-            Transform spawnPoint = availableSpawnPoints[Random.Range(0, availableSpawnPoints.Count)];
+            Transform spawnPoint = availableSpawnPoints[UnityEngine.Random.Range(0, availableSpawnPoints.Count)];
 
             GameObject newBreach = Instantiate(hullBreachZone, spawnPoint.position, Quaternion.identity, hullBreachParent.transform);
             newBreach.SetActive(true);
@@ -101,5 +105,12 @@ public class HullBreachParent : MonoBehaviour
             Debug.Log("HEY");
             gameInformation.numberOfHullBreaches--;
         }
+    }
+    public void RemoveAllBreaches(){
+        foreach(var i in spawnPointHullBreaches){
+            Destroy(i.Value);
+        }
+        spawnPointHullBreaches.Clear();
+        gameInformation.numberOfHullBreaches = 0;
     }
 }

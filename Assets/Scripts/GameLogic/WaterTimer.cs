@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,8 +18,17 @@ public class WaterTimer : MonoBehaviour
 
         canvas.enabled = true;
         progressBar.enabled = true;
-
-        StartCoroutine(ManageWaterLevel());
+        
+    }
+    void Update()
+    {
+        if(gameInformation.gameStarted){
+            StartCoroutine(ManageWaterLevel()); 
+        }
+        if(gameInformation.atDestination){
+            gameInformation.SetCurrentWater(0);
+            Destroy(gameObject);
+        }
     }
 
     private IEnumerator ManageWaterLevel(){
@@ -41,7 +51,6 @@ public class WaterTimer : MonoBehaviour
     private void GameOver(){
         progressBar.enabled = false;
         gameInformation.isGameOver = true;
-        gameInformation.LoadGameOverScene();
         Debug.Log("Game Over! The ship is flooded.");
     }
 }

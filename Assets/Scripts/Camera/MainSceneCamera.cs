@@ -6,7 +6,6 @@ public class MainSceneCamera : MonoBehaviour
 {
     public float swaySpeed = 1f;  // Speed of the sway
     public float swayAmount = 2f; // Amount of rotation in degrees
-
     private float timeOffset;
 
     void Start()

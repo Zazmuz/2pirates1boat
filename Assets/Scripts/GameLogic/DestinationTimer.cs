@@ -30,6 +30,7 @@ public class DestinationTimer : GameTimers
             progressBar.enabled = false;
             Destroy(gameObject);
         }
+        gameInformation.atDestination = true;
 
     }
 }
