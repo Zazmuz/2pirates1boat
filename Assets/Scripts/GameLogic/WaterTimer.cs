@@ -18,13 +18,9 @@ public class WaterTimer : MonoBehaviour
 
         canvas.enabled = true;
         progressBar.enabled = true;
-        
+        StartCoroutine(ManageWaterLevel()); 
     }
-    void Update()
-    {
-        if(gameInformation.gameStarted){
-            StartCoroutine(ManageWaterLevel()); 
-        }
+    void Update(){
         if(gameInformation.atDestination){
             gameInformation.SetCurrentWater(0);
             Destroy(gameObject);

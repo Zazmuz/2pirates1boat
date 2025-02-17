@@ -11,6 +11,7 @@ public class InitilizePlayer : MonoBehaviour
     private PlayerInformation player;
     private PlayerInput playerInput;
     private SpriteRenderer spriteRenderer;
+    public GameInformation gameInformation;
     
     void Start(){
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -25,9 +26,11 @@ public class InitilizePlayer : MonoBehaviour
         switch(playerInput.currentControlScheme){
             case "WASD":
                 player = player1;
+                gameInformation.AddPlayer(player);
                 break;
             case "Arrows":
                 player = player2;
+                gameInformation.AddPlayer(player);
                 break;
             default:
                 player = null;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 [CreateAssetMenu(menuName = "Game")]
 public class GameInformation : ScriptableObject{
@@ -11,22 +12,28 @@ public class GameInformation : ScriptableObject{
     [Range(0,10)]public int maxHullBreaches;
     [Range(1f,100f)] public float maxWater = 100f;
     [Range(1f,100f)] [SerializeField] private float currentWater = 0f;
+    [Header("Players")]
+    private List<PlayerInformation> players = new List<PlayerInformation>();
     public bool isSpawningHullBreaches;
     [Header("Other shits")]
     public bool isGameOver;
     public bool atDestination;
     public bool gameStarted;
-    
+    void Update(){
+        
+    }
     public float GetCurrentWater(){
         return currentWater;
     }
     public void SetCurrentWater(float amount){
         currentWater = amount;
+        CheckWaterLevel();
     }
     public void ModifyWater(float amount)
     {
         currentWater += amount;
         currentWater = Mathf.Clamp(currentWater, 0, maxWater);
+        CheckWaterLevel();
     }
     public void ResetGame(){
         numberOfHullBreaches = 0;
@@ -34,9 +41,31 @@ public class GameInformation : ScriptableObject{
         isGameOver = false;
         atDestination = false;
     }
+    private void CheckWaterLevel(){
+        Debug.Log("Are we checking the water??");
+        if (currentWater >= maxWater){
+            isGameOver = true;
+            LoadGameOverScene();
+        }
+    }
     public void LoadGameOverScene(){
-        SceneChanger.ChangeScene("Game Over");
+        SceneChanger.ChangeScene("GameOver");
+    }
+    public void AddPlayer(PlayerInformation player){
+        if (!players.Contains(player)){
+            players.Add(player);
+        }
     }
 
+    public void RemovePlayer(PlayerInformation player){
+        if (players.Contains(player))
+        {
+            players.Remove(player);
+        }
+    }
+
+    public List<PlayerInformation> GetPlayers(){
+        return new List<PlayerInformation>(players);
+    }
 
 }
