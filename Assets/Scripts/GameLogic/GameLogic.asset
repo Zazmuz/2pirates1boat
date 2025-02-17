@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5b342c872400340abb80b666f32da8, type: 3}
   m_Name: GameLogic
   m_EditorClassIdentifier: 
-  timeTilDestination: 80
+  timeTilDestination: 30
   timeTilNewBreach: 5
-  numberOfHullBreaches: 3
+  numberOfHullBreaches: 0
   maxHullBreaches: 5
-  maxWater: 11
-  currentWater: 11
+  maxWater: 100
+  currentWater: 1
+  players:
+  - {fileID: 0}
+  - {fileID: 0}
   isSpawningHullBreaches: 1
-  isGameOver: 1
-  atDestination: 0
+  isGameOver: 0
+  atDestination: 1
   gameStarted: 0

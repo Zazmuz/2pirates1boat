@@ -13,7 +13,7 @@ public class GameInformation : ScriptableObject{
     [Range(1f,100f)] public float maxWater = 100f;
     [Range(1f,100f)] [SerializeField] private float currentWater = 0f;
     [Header("Players")]
-    private List<PlayerInformation> players = new List<PlayerInformation>();
+    [SerializeField] private List<PlayerInformation> players = new List<PlayerInformation>();
     public bool isSpawningHullBreaches;
     [Header("Other shits")]
     public bool isGameOver;

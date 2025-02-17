@@ -5,10 +5,22 @@ using UnityEngine;
 public class GameState : MonoBehaviour
 {
     public GameInformation gameInformation;
+    private List<PlayerInformation> players = new();
     public Grid grid;
     void Start(){
         gameInformation.ResetGame();
+        players = gameInformation.GetPlayers();
+        Debug.Log(players);
+        if(players != null){
+            Instantiate<PlayerInformation>(players[0]);
+            Instantiate<PlayerInformation>(players[1]);
+        }else
+            Debug.LogError("No players in list");
     }
+        
+
+        
+    
     void Update(){
         if(gameInformation.atDestination){
             Move();
@@ -18,8 +30,6 @@ public class GameState : MonoBehaviour
         } //define loss condition. player1 && player2 dead || too much water idk, something else?
     }
     IEnumerator MoveGridOut(){
-
-
     Vector2 startGridPos = grid.transform.position;
     Vector2 targetGridPos = new Vector2(-30, -2); //where to move the ship
 
