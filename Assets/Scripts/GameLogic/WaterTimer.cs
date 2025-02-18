@@ -16,13 +16,19 @@ public class WaterTimer : MonoBehaviour
         canvas = GetComponentInChildren<Canvas>();
         progressBar = GetComponentInChildren<Slider>();
 
-        canvas.enabled = true;
-        progressBar.enabled = true;
+        canvas.enabled = false;
+        progressBar.enabled = false;
         StartCoroutine(ManageWaterLevel()); 
     }
     void Update(){
+        if(gameInformation.gameStarted){
+            canvas.enabled = true;
+            progressBar.enabled = true;
+        }
         if(gameInformation.atDestination){
             gameInformation.SetCurrentWater(0);
+            canvas.enabled = false;
+            progressBar.enabled = false;
             Destroy(gameObject);
         }
     }

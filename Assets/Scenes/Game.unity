@@ -2498,6 +2498,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameInformation: {fileID: 11400000, guid: 176b728f4b16aec45a739440c6000b26, type: 2}
   grid: {fileID: 1702163046}
+  startPosition: {x: 30, y: -2}
+  inViewPosition: {x: -3, y: -2}
+  atDestinationPosition: {x: -30, y: -2}
 --- !u!4 &1215950106
 Transform:
   m_ObjectHideFlags: 0

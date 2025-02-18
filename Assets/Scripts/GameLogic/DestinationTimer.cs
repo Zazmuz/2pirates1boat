@@ -12,12 +12,25 @@ public class DestinationTimer : GameTimers
         timeTilDestination = gameInformation.timeTilDestination;
         canvas = GetComponentInChildren<Canvas>();
         progressBar = GetComponentInChildren<Slider>();
-
-        StartCoroutine(FillProgressBar());
+        canvas.enabled = false; 
+        progressBar.enabled = false;
+        
     }
-    public IEnumerator FillProgressBar(){
-        canvas.enabled = true; 
-        progressBar.enabled = true;
+    void Update()
+    {
+        if(gameInformation.gameStarted){
+            StartCoroutine(FillProgressBar());  
+            canvas.enabled = true; 
+            progressBar.enabled = true;
+        }else if(gameInformation.atDestination){
+            StopCoroutine(FillProgressBar());
+            canvas.enabled = false; 
+            progressBar.enabled = false;
+        }
+        
+    }
+    private IEnumerator FillProgressBar(){
+        
         float elapsedTime = 0f;
         progressBar.value = 0f;
 
