@@ -35,18 +35,7 @@ public class WaterTimer : MonoBehaviour
             }
 
             progressBar.value = gameInformation.GetCurrentWater() / maxWater;
-
-            if (gameInformation.GetCurrentWater() >= maxWater){
-                GameOver();
-                yield break;
-            }
             yield return null;
         }
-    }
-
-    private void GameOver(){
-        progressBar.enabled = false;
-        gameInformation.isGameOver = true;
-        Debug.Log("Game Over! The ship is flooded.");
     }
 }
