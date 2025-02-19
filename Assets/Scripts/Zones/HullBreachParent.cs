@@ -40,11 +40,11 @@ public class HullBreachParent : MonoBehaviour
         spawnPoints = new Transform[5];
 
         Vector3Int[] gridPositions = {
-            new Vector3Int(-3, 2, 0),
-            new Vector3Int(4, 2, 0),
-            new Vector3Int(6, -1, 0),
-            new Vector3Int(-3, -1, 0),
-            new Vector3Int(-2, -4, 0)
+            new Vector3Int(-12, 1, 0),
+            new Vector3Int(5, 0, 0),
+            new Vector3Int(-12, -4, 0),
+            new Vector3Int(5, -4, 0),
+            new Vector3Int(-6, -4, 0)
         };
 
         for (int i = 0; i < gridPositions.Length; i++)
