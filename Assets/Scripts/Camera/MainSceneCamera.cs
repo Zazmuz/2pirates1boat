@@ -7,6 +7,7 @@ public class MainSceneCamera : MonoBehaviour
     public float swaySpeed = 1f;  // Speed of the sway
     public float swayAmount = 2f; // Amount of rotation in degrees
     private float timeOffset;
+    public float unitsToShowHorizontally; //30 is good
 
     void Start()
     {
@@ -17,6 +18,15 @@ public class MainSceneCamera : MonoBehaviour
     void Update()
     {
         CameraSway();
+        float screenWidth = unitsToShowHorizontally;
+
+        float screenHeight = screenWidth * Screen.height / Screen.width;
+
+        float orthographicSize = screenHeight / 2f;
+
+        Camera.main.orthographicSize = orthographicSize;
+
+        Camera.main.aspect = screenWidth / screenHeight;
     }
 
     void CameraSway()

@@ -758,6 +758,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swaySpeed: 1
   swayAmount: 2
+  unitsToShowHorizontally: 30
 --- !u!1 &600320739
 GameObject:
   m_ObjectHideFlags: 0

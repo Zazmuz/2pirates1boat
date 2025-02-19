@@ -8,7 +8,7 @@ public class GameState : MonoBehaviour
 {
     public GameInformation gameInformation;
     private List<PlayerInformation> players = new();
-    public Grid grid;
+    public Grid grid; //the ship :)
     public Vector2 startPosition;
     public Vector2 inViewPosition;
     public Vector2 atDestinationPosition;
@@ -24,7 +24,6 @@ public class GameState : MonoBehaviour
             Debug.LogError("No players in list");
 
         Move(startPosition, inViewPosition, 3f);
-        
       
     }
         
