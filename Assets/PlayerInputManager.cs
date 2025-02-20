@@ -18,10 +18,11 @@ public class PlayerManager : MonoBehaviour
 
     void Start(){
         sharedDeviceInputManager = GetComponent<SharedDeviceInputManager>();
-
-        if (sharedDeviceInputManager == null)
-        {
-            Debug.LogError("⚠ sharedDeviceInputManager is missing from PlayerManager!");
+    }
+    void Update()
+    {
+        if(gameInformation.GetPlayers().Count == 2){
+            SceneChanger.ChangeScene("Game");
         }
     }
 
@@ -47,7 +48,6 @@ public class PlayerManager : MonoBehaviour
         if (players.Contains(playerToRemove))
         {
             players.Remove(playerToRemove);
-            Debug.Log($"❌ Player {playerInput.playerIndex} left. Total players: {players.Count}");
         }
     }
 

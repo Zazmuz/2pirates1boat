@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameState : MonoBehaviour
 {
@@ -12,22 +13,31 @@ public class GameState : MonoBehaviour
     public Vector2 startPosition;
     public Vector2 inViewPosition;
     public Vector2 atDestinationPosition;
+    private string sceneName;
     private bool timeToGame = false; // jag vill flå mig själv
 
-    private void Start(){
+    private void StartRound(){
+        
         gameInformation.ResetGame();
         players = gameInformation.GetPlayers();
-        Debug.Log(players);
+        //Debug.Log(players);
         if(players != null){
             //Instantiate<GameObject>(players[0]);
             //Instantiate<GameObject>(players[1]);
         }else
             Debug.LogError("No players in list");
-
         Move(startPosition, inViewPosition, 3f);
+
     }
+    void Start(){
+        Debug.Log(SceneManager.GetActiveScene());
+        sceneName = SceneManager.GetActiveScene().name;
+        if(sceneName == "Game"){
+            StartRound();
+        }
         
-    
+    }
+
     void Update(){
         if(gameInformation.atDestination){
             Move(inViewPosition, atDestinationPosition, 6f);
