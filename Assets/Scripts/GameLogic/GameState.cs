@@ -7,24 +7,24 @@ using UnityEngine;
 public class GameState : MonoBehaviour
 {
     public GameInformation gameInformation;
-    private List<PlayerInformation> players = new();
-    public Grid grid; //the ship :)
+    private List<GameObject> players = new();
+    public Grid grid;
     public Vector2 startPosition;
     public Vector2 inViewPosition;
     public Vector2 atDestinationPosition;
     private bool timeToGame = false; // jag vill flå mig själv
-    void Start(){
+
+    private void Start(){
         gameInformation.ResetGame();
         players = gameInformation.GetPlayers();
         Debug.Log(players);
         if(players != null){
-            //Instantiate<PlayerInformation>(players[0]);
-            //Instantiate<PlayerInformation>(players[1]);
+            //Instantiate<GameObject>(players[0]);
+            //Instantiate<GameObject>(players[1]);
         }else
             Debug.LogError("No players in list");
 
         Move(startPosition, inViewPosition, 3f);
-      
     }
         
     

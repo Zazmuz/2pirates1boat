@@ -39,18 +39,18 @@ public class HullBreachParent : MonoBehaviour
 
         spawnPoints = new Transform[5];
 
-        Vector3Int[] gridPositions = {
-            new Vector3Int(-12, 1, 0),
-            new Vector3Int(5, 0, 0),
-            new Vector3Int(-12, -4, 0),
-            new Vector3Int(5, -4, 0),
-            new Vector3Int(-6, -4, 0)
+        Vector3[] gridPositions = { //this is insane, fuckugly pos can someone do this clean would be sick.
+            new Vector3(-11.5f, 1, 0),
+            new Vector3(5.5f, 0, 0),
+            new Vector3(-11.5f, -4, 0),
+            new Vector3(5.5f, -4, 0),
+            new Vector3(-6.5f, -4, 0)
         };
 
         for (int i = 0; i < gridPositions.Length; i++)
         {
             GameObject spawnPointObj = new GameObject("SpawnPoint" + (i + 1));
-            spawnPointObj.transform.position = grid.CellToWorld(gridPositions[i]);
+            spawnPointObj.transform.position = gridPositions[i];
             spawnPoints[i] = spawnPointObj.transform;
         }
     }

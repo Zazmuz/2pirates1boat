@@ -23,5 +23,5 @@ MonoBehaviour:
   - {fileID: 0}
   isSpawningHullBreaches: 1
   isGameOver: 0
-  atDestination: 1
+  atDestination: 0
   gameStarted: 0
