@@ -11,6 +11,5 @@ public class PlayerInformation : ScriptableObject
     [Header("Gameplay and position")]
     public float posX;
     public float posY;
-    
 
 }
