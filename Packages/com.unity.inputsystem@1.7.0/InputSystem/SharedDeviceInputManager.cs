@@ -74,5 +74,24 @@ public class SharedDeviceInputManager : PlayerInputManager
             playerIndex++;
             
         }
+        public void ManuallyJoinPlayer()
+        {
+            if (!CheckIfPlayerCanJoin())  // Ensure there's space for another player
+            {
+                Debug.LogWarning("Player cannot join, limit reached.");
+                return;
+            }
+
+            if (playerIndex >= controlSchemes.Length)
+            {
+                Debug.LogWarning("Maximum number of keyboard players reached.");
+                return;
+            }
+
+            // Manually create a player and assign them to a control scheme
+            var player = JoinPlayer(pairWithDevice: Keyboard.current);
+            RebindPlayer(player);
+        }
+
         #endregion
     }

@@ -19,6 +19,8 @@ public class GameInformation : ScriptableObject{
     public bool isGameOver;
     public bool atDestination;
     public bool gameStarted;
+    public bool timeToGame;
+    public bool isCutscene;
     public float GetCurrentWater(){
         return currentWater;
     }
@@ -34,14 +36,12 @@ public class GameInformation : ScriptableObject{
     }
     public void StartGame(){
         gameStarted = true;
-        Debug.Log("We are starting the game");
     }
     public void ResetGame(){
         numberOfHullBreaches = 0;
         currentWater = 0f;
         isGameOver = false;
         atDestination = false;
-        gameStarted = false;
     }
     private void CheckWaterLevel(){
         if (currentWater >= maxWater){

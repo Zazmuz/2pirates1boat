@@ -17,11 +17,12 @@ MonoBehaviour:
   numberOfHullBreaches: 0
   maxHullBreaches: 5
   maxWater: 100
-  currentWater: 1
+  currentWater: 0
   players:
-  - {fileID: 0}
   - {fileID: 0}
   isSpawningHullBreaches: 1
   isGameOver: 0
   atDestination: 0
   gameStarted: 0
+  timeToGame: 0
+  isCutscene: 0
