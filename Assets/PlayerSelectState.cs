@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class PlayerSelectState : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    public SharedDeviceInputManager sharedDeviceInputManager;
 
     // Update is called once per frame
-    void Update()
-    {
-        
+    void Update(){
+        if(sharedDeviceInputManager.playerCount >= 2 && Input.GetKeyDown(KeyCode.Space)){
+            SceneChanger.ChangeScene("Game");
+        }
     }
 }
