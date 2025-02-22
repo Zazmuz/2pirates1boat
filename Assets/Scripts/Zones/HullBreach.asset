@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: HullBreach
   m_EditorClassIdentifier: 
   zoneName: Hullbreach
-  interactionTime: 5
+  interactionTime: 2
   altSprite: {fileID: 21300000, guid: 67379e6346922b14fa1572dabffe9fa9, type: 3}
+  numberOfInstances: 0
+  spawnMoreInstances: 1
   requiredItem:
   - {fileID: 0}
   givesItem: {fileID: 0}

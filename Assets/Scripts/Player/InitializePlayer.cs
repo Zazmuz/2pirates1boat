@@ -26,11 +26,11 @@ public class InitilizePlayer : MonoBehaviour
         switch(playerInput.currentControlScheme){
             case "WASD":
                 player = player1;
-                gameInformation.AddPlayer(player);
+                //gameInformation.AddPlayer(gameObject);
                 break;
             case "Arrows":
                 player = player2;
-                gameInformation.AddPlayer(player);
+                //gameInformation.AddPlayer(gameObject);
                 break;
             default:
                 player = null;

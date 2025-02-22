@@ -25,7 +25,7 @@ public class PlayerItemManager : MonoBehaviour{
     }
     public Item GetHeldItem(){
         if(inventory[0] == null){
-            Debug.LogError("Theres nothing in inventory");
+            Debug.Log("Nothing in inventory");
         }
         return inventory[0];
         

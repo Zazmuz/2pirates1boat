@@ -13,12 +13,14 @@ public class GameInformation : ScriptableObject{
     [Range(1f,100f)] public float maxWater = 100f;
     [Range(1f,100f)] [SerializeField] private float currentWater = 0f;
     [Header("Players")]
-    [SerializeField] private List<PlayerInformation> players = new List<PlayerInformation>();
+    [SerializeField] private List<GameObject> players = new List<GameObject>();
     public bool isSpawningHullBreaches;
     [Header("Other shits")]
     public bool isGameOver;
     public bool atDestination;
     public bool gameStarted;
+    public bool timeToGame;
+    public bool isCutscene;
     public float GetCurrentWater(){
         return currentWater;
     }
@@ -34,17 +36,14 @@ public class GameInformation : ScriptableObject{
     }
     public void StartGame(){
         gameStarted = true;
-        Debug.Log("We are starting the game");
     }
     public void ResetGame(){
         numberOfHullBreaches = 0;
         currentWater = 0f;
         isGameOver = false;
         atDestination = false;
-        gameStarted = false;
     }
     private void CheckWaterLevel(){
-        Debug.Log("Are we checking the water??");
         if (currentWater >= maxWater){
             isGameOver = true;
             LoadGameOverScene();
@@ -53,21 +52,21 @@ public class GameInformation : ScriptableObject{
     public void LoadGameOverScene(){
         SceneChanger.ChangeScene("GameOver");
     }
-    public void AddPlayer(PlayerInformation player){
+    public void AddPlayer(GameObject player){
         if (!players.Contains(player)){
             players.Add(player);
         }
     }
 
-    public void RemovePlayer(PlayerInformation player){
+    public void RemovePlayer(GameObject player){
         if (players.Contains(player))
         {
             players.Remove(player);
         }
     }
 
-    public List<PlayerInformation> GetPlayers(){
-        return new List<PlayerInformation>(players);
+    public List<GameObject> GetPlayers(){
+        return new List<GameObject>(players);
     }
 
 }

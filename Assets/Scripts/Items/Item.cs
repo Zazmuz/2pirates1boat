@@ -18,7 +18,7 @@ public enum ItemType{
     Weapon, //swords, guns
     Tool, //hammers
     Resources,// planks and other stuff, more materials?
-    Food //oranges, medicine?
+    Consumable //oranges, medicine?
 }
 public enum ActionType{
     Attack,
