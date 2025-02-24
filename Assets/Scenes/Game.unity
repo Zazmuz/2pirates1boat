@@ -6093,7 +6093,7 @@ GameObject:
   - component: {fileID: 1450781865}
   - component: {fileID: 1450781864}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: sound_mainTheme
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6137,7 +6137,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -7410,7 +7410,7 @@ GameObject:
   - component: {fileID: 1837075409}
   - component: {fileID: 1837075408}
   m_Layer: 0
-  m_Name: ambience_menu
+  m_Name: sound_ambience
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
