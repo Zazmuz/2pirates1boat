@@ -9,13 +9,11 @@ public class HullBreachParent : MonoBehaviour
     public GameInformation gameInformation;
     public GameObject hullBreachZone;
     private bool isSpawning = false;
-
     private Dictionary<Transform, GameObject> spawnPointHullBreaches = new Dictionary<Transform, GameObject>();
 
     // Start is called before the first frame update
     void Start(){
         gameInformation.numberOfHullBreaches = 0;
-        gameInformation.maxHullBreaches = 5;
 
         InitializeSpawnPoints();
     }

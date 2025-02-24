@@ -1,9 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameState : MonoBehaviour
 {
@@ -15,54 +11,99 @@ public class GameState : MonoBehaviour
     public Vector2 inViewPosition;
     public Vector2 atDestinationPosition;
 
-    void Awake()
-    {
-        // Initialize the game state defaults when the scene is loaded
-        gameInformation.ResetGame();  // Reset all game-related variables to default
-        gameInformation.gameStarted = false; // Set gameStarted to false by default
-        gameInformation.timeToGame = false;  // Ensure timeToGame is initially false
-        gameInformation.isGameOver = false;  // Set isGameOver to false when loading the scene
-        gameInformation.atDestination = false;  // Ensure this flag is false as well
-        Debug.Log("Game state initialized.");
+    public GamePhase currentPhase = GamePhase.Waiting;
+
+    void Awake(){
+        gameInformation.ResetGame();
     }
+
     void Start(){
         sharedDeviceInputManager = GetComponent<SharedDeviceInputManager>();
         sharedDeviceInputManager.enabled = false;
-        MoveShipInView();
-        
-    }
-    void Update(){
-        if(gameInformation.atDestination){
-            MoveShipOutOfView();
-            StartCoroutine(NextScene("Game"));
-        }
-        if (gameInformation.timeToGame && !gameInformation.gameStarted){
-            gameInformation.StartGame();
-            gameInformation.timeToGame = false;
-        }
-        if(gameInformation.gameStarted){
-            sharedDeviceInputManager.enabled = true;
-            StartRound();
-        }
-        
-        if(gameInformation.isGameOver){
-            
-        } //define loss condition. player1 && player2 dead || too much water idk, something else?
-    }
-    private void StartRound(){ 
-        sharedDeviceInputManager.ManuallyJoinPlayer();
-        sharedDeviceInputManager.ManuallyJoinPlayer();
 
+        moveShip.OnShipMovementComplete += HandleShipMovementComplete;
+
+        StartCoroutine(MoveShipInViewStart(0f));
     }
-    private void MoveShipInView(){
+
+    void Update()
+    {
+        if (gameInformation.isGameOver)
+        {
+            // Uncomment this if needed for game over handling.
+            // StartCoroutine(HandleGameOver());
+        }
+
+        if (currentPhase == GamePhase.Running)
+        {
+            if (gameInformation.atDestination)
+            {
+                StartCoroutine(MoveShipToDestination(0f));
+                gameInformation.gameStarted = false;
+                gameInformation.isSpawningHullBreaches = false;
+                currentPhase = GamePhase.AtDestination;
+            }
+        }
+        if (currentPhase == GamePhase.AtDestination)
+        {
+            StartCoroutine(MoveShipFromDestination(2f));
+        }
+    }
+
+    private void HandleShipMovementComplete()
+    {
+        if (currentPhase == GamePhase.ShipMovingIn)
+        {
+            currentPhase = GamePhase.Running;
+            StartGame();
+        }
+        else if (currentPhase == GamePhase.ShipMovingOut)
+        {
+            currentPhase = GamePhase.AtDestination;
+        }
+    }
+
+    private void StartGame()
+    {
+        gameInformation.ResetGame();
+        gameInformation.StartGame();
+        sharedDeviceInputManager.enabled = true;
+        sharedDeviceInputManager.ManuallyJoinPlayer();
+        sharedDeviceInputManager.ManuallyJoinPlayer();
+    }
+
+    private IEnumerator MoveShipInViewStart(float delay)
+    {   
+        yield return new WaitForSeconds(delay);
+        currentPhase = GamePhase.ShipMovingIn;
         moveShip.Move(startPosition, inViewPosition, 3f);
+        
+        
     }
-    private void MoveShipOutOfView(){
+
+    private IEnumerator MoveShipToDestination(float delay){
+        yield return new WaitForSeconds(delay);
+        currentPhase = GamePhase.ShipMovingOut;
         moveShip.Move(inViewPosition, atDestinationPosition, 3f);
     }
-    
-    private IEnumerator NextScene(string scene){
-        yield return new WaitForSeconds(12);
-        SceneChanger.ChangeScene(scene); 
+
+    private IEnumerator MoveShipFromDestination(float delay)
+    {
+        
+        if (gameInformation.atDestination && Input.GetKey(KeyCode.Space)){
+            currentPhase = GamePhase.ShipMovingIn;
+            moveShip.Move(atDestinationPosition, inViewPosition, 3f);
+            gameInformation.atDestination = false;
+            yield return new WaitForSeconds(delay);
+        }
+    }
+
+    public enum GamePhase
+    {
+        Waiting,
+        ShipMovingIn,
+        Running,
+        ShipMovingOut,
+        AtDestination // Phase for when the ship is at the destination
     }
 }

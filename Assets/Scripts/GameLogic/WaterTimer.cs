@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,37 +9,56 @@ public class WaterTimer : MonoBehaviour
     public GameInformation gameInformation;
     private float maxWater;
 
-    void Start(){
+    private void Start()
+    {
         maxWater = gameInformation.maxWater;
-
         canvas = GetComponentInChildren<Canvas>();
         progressBar = GetComponentInChildren<Slider>();
 
         canvas.enabled = false;
         progressBar.enabled = false;
-        StartCoroutine(ManageWaterLevel()); 
+
+        StartCoroutine(ManageWaterLevel());
     }
-    void Update(){
-        if(gameInformation.gameStarted){
-            canvas.enabled = true;
-            progressBar.enabled = true;
+
+    private void Update()
+    {
+        if (gameInformation.gameStarted)
+        {
+            ShowWaterUI(true);
         }
-        if(gameInformation.atDestination){
-            gameInformation.SetCurrentWater(0);
-            canvas.enabled = false;
-            progressBar.enabled = false;
-            Destroy(gameObject);
+        else
+        {
+            ShowWaterUI(false);
+        }
+
+        if (gameInformation.atDestination)
+        {
+            ResetWaterLevel();
         }
     }
 
-    private IEnumerator ManageWaterLevel(){
+    private void ShowWaterUI(bool isVisible){
+        canvas.enabled = isVisible;
+        progressBar.enabled = isVisible;
+    }
+
+    private void ResetWaterLevel()
+    {
+        gameInformation.SetCurrentWater(0);
+        ShowWaterUI(false);
+        StopAllCoroutines();
+    }
+
+    private IEnumerator ManageWaterLevel()
+    {
         while (true)
         {
-            if (gameInformation.numberOfHullBreaches > 0){
+            if (gameInformation.gameStarted && gameInformation.numberOfHullBreaches > 0)
+            {
                 gameInformation.ModifyWater(Time.deltaTime * gameInformation.numberOfHullBreaches);
+                progressBar.value = gameInformation.GetCurrentWater() / maxWater;
             }
-
-            progressBar.value = gameInformation.GetCurrentWater() / maxWater;
             yield return null;
         }
     }

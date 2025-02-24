@@ -14,8 +14,9 @@ public class GameInformation : ScriptableObject{
     [Range(1f,100f)] [SerializeField] private float currentWater = 0f;
     [Header("Players")]
     [SerializeField] private List<GameObject> players = new List<GameObject>();
-    public bool isSpawningHullBreaches;
+
     [Header("Other shits")]
+    public bool isSpawningHullBreaches;
     public bool isGameOver;
     public bool atDestination;
     public bool gameStarted;
@@ -36,12 +37,17 @@ public class GameInformation : ScriptableObject{
     }
     public void StartGame(){
         gameStarted = true;
+        isSpawningHullBreaches = true;
     }
     public void ResetGame(){
         numberOfHullBreaches = 0;
         currentWater = 0f;
         isGameOver = false;
+        isSpawningHullBreaches = false;
         atDestination = false;
+        gameStarted = false;
+        timeToGame = false;
+        isCutscene = false;
     }
     private void CheckWaterLevel(){
         if (currentWater >= maxWater){
