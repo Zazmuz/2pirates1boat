@@ -18,16 +18,8 @@ public class DestinationTimer : GameTimers
         canvas.enabled = false;
         progressBar.enabled = false;
     }
-
-    void OnEnable()
-    {
-        progressBar.value = 0f;
-    }
-
     void Update()
     {
-        // Debugging to check if gameStarted is true and the correct flag state
-        Debug.Log($"Game Started: {gameInformation.gameStarted}, At Destination: {gameInformation.atDestination}");
 
         // When the game has started and destination is not reached
         if (gameInformation.gameStarted && !gameInformation.atDestination)

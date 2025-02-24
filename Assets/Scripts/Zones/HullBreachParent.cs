@@ -19,10 +19,11 @@ public class HullBreachParent : MonoBehaviour
     }
 
     void Update(){
-        if (gameInformation.isSpawningHullBreaches && !isSpawning){
+        if (gameInformation.isSpawningHullBreaches && gameInformation.gameStarted && !isSpawning){
             StartCoroutine(TimeToSpawnNewHullBreach());
         }
         if(gameInformation.atDestination){
+            StopCoroutine(TimeToSpawnNewHullBreach());
             RemoveAllBreaches();
         }
     }
@@ -53,12 +54,14 @@ public class HullBreachParent : MonoBehaviour
         }
     }
 
-    private IEnumerator TimeToSpawnNewHullBreach()
-    {
-        isSpawning = true;
-        yield return new WaitForSeconds(gameInformation.timeTilNewBreach);
-        SpawnHullBreach();
-        isSpawning = false;
+    private IEnumerator TimeToSpawnNewHullBreach(){
+        if(gameInformation.gameStarted){
+            isSpawning = true;
+            yield return new WaitForSeconds(gameInformation.timeTilNewBreach);
+            Debug.Log("hey wtf");
+            SpawnHullBreach();
+            isSpawning = false;
+        }
     }
 
     void SpawnHullBreach()
