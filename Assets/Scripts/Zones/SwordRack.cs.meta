@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 86481deec08855f428ea364e5adc16f3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - zoneStats: {fileID: 11400000, guid: 900c89bf3ce1044448edc41f3caf92d0, type: 2}
+  - currentPlayerInZone: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -12,4 +12,8 @@ public class PlayerInformation : ScriptableObject
     public float posX;
     public float posY;
 
+    [Header("Gameplay")]
+    public float health;
+    public float vitaminC;
+
 }

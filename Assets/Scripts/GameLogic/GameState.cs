@@ -50,8 +50,7 @@ public class GameState : MonoBehaviour
         }
     }
 
-    private void HandleShipMovementComplete()
-    {
+    private void HandleShipMovementComplete(){
         if (currentPhase == GamePhase.ShipMovingIn)
         {
             currentPhase = GamePhase.Running;
@@ -72,13 +71,10 @@ public class GameState : MonoBehaviour
         sharedDeviceInputManager.ManuallyJoinPlayer();
     }
 
-    private IEnumerator MoveShipInViewStart(float delay)
-    {   
+    private IEnumerator MoveShipInViewStart(float delay){   
         yield return new WaitForSeconds(delay);
         currentPhase = GamePhase.ShipMovingIn;
         moveShip.Move(startPosition, inViewPosition, 3f);
-        
-        
     }
 
     private IEnumerator MoveShipToDestination(float delay){
@@ -104,6 +100,6 @@ public class GameState : MonoBehaviour
         ShipMovingIn,
         Running,
         ShipMovingOut,
-        AtDestination // Phase for when the ship is at the destination
+        AtDestination
     }
 }
