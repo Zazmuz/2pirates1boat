@@ -7,6 +7,11 @@ public class GameInformation : ScriptableObject{
     [Header("Timers")]
     [Range(1f,120f)] public float timeTilDestination = 5f;
     [Range(1f,10f)] public float timeTilNewBreach = 5f; //should be randomized every time new breach spawns
+
+    [Header("Helm Settings")]
+    public float helmModifier = 1f; // Reduce time per second when at helm
+    public bool playerAtHelm = false;
+
     [Header("Hull Breaches")]
     [Range(0,5)]public int numberOfHullBreaches;
     [Range(0,10)]public int maxHullBreaches;
@@ -58,21 +63,25 @@ public class GameInformation : ScriptableObject{
     public void LoadGameOverScene(){
         SceneChanger.ChangeScene("GameOver");
     }
-    public void AddPlayer(GameObject player){
-        if (!players.Contains(player)){
-            players.Add(player);
-        }
-    }
 
-    public void RemovePlayer(GameObject player){
+    public void RemovePlayer(GameObject player){ //remove later dont really needed
+
         if (players.Contains(player))
         {
             players.Remove(player);
         }
     }
-
-    public List<GameObject> GetPlayers(){
-        return new List<GameObject>(players);
+    public void PlayerAtTheHelm(bool isAtHelm) {
+        playerAtHelm = isAtHelm;
     }
+
+    public void UpdateTimer() {
+        if (playerAtHelm) {
+            timeTilDestination -= helmModifier * Time.deltaTime;
+        }
+
+        timeTilDestination = Mathf.Clamp(timeTilDestination, 0, 120f); // Prevent negative time
+    }
+
 
 }

@@ -37,13 +37,15 @@ public class LadderMovement : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.CompareTag("Ladder")) {
+        if (collision.CompareTag("Ladder") && collision.gameObject.layer != LayerMask.NameToLayer("Weapon")){
+            Debug.Log(collision.gameObject.layer);
             isLadder = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
-        if (collision.CompareTag("Ladder")) {
+        if (collision.CompareTag("Ladder") && collision.gameObject.layer != LayerMask.NameToLayer("Weapon")) {
+            Debug.Log(collision);
             isLadder = false;
             isClimbing = false;
             _pm.VerticalVelocity = _rb.velocity.y;

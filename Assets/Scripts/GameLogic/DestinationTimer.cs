@@ -4,38 +4,45 @@ using UnityEngine.UI;
 
 public class DestinationTimer : GameTimers
 {
-    private float timeTilDestination;
     private Canvas canvas;
     private Slider progressBar;
+    private Coroutine progressCoroutine;
+    private float startTime; // Track when the timer starts
 
     void Start()
     {
-        timeTilDestination = gameInformation.timeTilDestination;
         canvas = GetComponentInChildren<Canvas>();
         progressBar = GetComponentInChildren<Slider>();
 
-        // Initially, hide the UI elements
+        // Initially hide UI
         canvas.enabled = false;
         progressBar.enabled = false;
     }
+
     void Update()
     {
-
-        // When the game has started and destination is not reached
         if (gameInformation.gameStarted && !gameInformation.atDestination)
         {
-            // Enable the progress bar and start the countdown
-            if (!canvas.enabled) // Only enable if not already enabled
+            if (!canvas.enabled)
             {
                 canvas.enabled = true;
                 progressBar.enabled = true;
-                StartCoroutine(FillProgressBar());
+
+                if (progressCoroutine == null)
+                {
+                    startTime = Time.time; // Reset start time
+                    progressCoroutine = StartCoroutine(FillProgressBar());
+                }
             }
         }
-        // When the destination is reached, disable the UI elements
         else if (gameInformation.atDestination)
         {
-            StopCoroutine(FillProgressBar());
+            if (progressCoroutine != null)
+            {
+                StopCoroutine(progressCoroutine);
+                progressCoroutine = null;
+            }
+
             canvas.enabled = false;
             progressBar.enabled = false;
         }
@@ -43,24 +50,27 @@ public class DestinationTimer : GameTimers
 
     private IEnumerator FillProgressBar()
     {
-        // Reset the progress bar each time the round starts
-        progressBar.value = 0f;
-
-        float elapsedTime = 0f;
-
-        // Start filling the progress bar
-        while (elapsedTime < timeTilDestination)
+        while (!gameInformation.atDestination)
         {
-            elapsedTime += Time.deltaTime;
-            progressBar.value = elapsedTime / timeTilDestination;
+            float elapsedTime = Time.time - startTime;
+            float dynamicTimeRemaining = gameInformation.timeTilDestination;
+
+            // Ensure we don't divide by zero
+            if (dynamicTimeRemaining > 0)
+            {
+                progressBar.value = Mathf.Clamp01(elapsedTime / dynamicTimeRemaining);
+            }
+
+            // If progress bar reaches 100%, set destination reached
+            if (progressBar.value >= 1f)
+            {
+                gameInformation.atDestination = true;
+                progressBar.enabled = false;
+                progressCoroutine = null;
+                yield break; // Stop the coroutine
+            }
+
             yield return null;
-        }
-
-        // Once the progress bar is full, mark the destination as reached
-        if (progressBar.value >= 1f)
-        {
-            progressBar.enabled = false; // Hide the progress bar
-            gameInformation.atDestination = true; // Mark that the destination has been reached
         }
     }
 }

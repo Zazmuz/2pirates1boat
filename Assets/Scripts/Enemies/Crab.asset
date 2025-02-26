@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0170f9a22439da044b809ce3faf9c8d7, type: 3}
-  m_Name: Player1
+  m_Script: {fileID: 11500000, guid: ae131b309bbeb44498eded891a7fed24, type: 3}
+  m_Name: Crab
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300020, guid: 6fa7150d6e84a0f4d9122fda376c5e15, type: 3}
+  sprite: {fileID: 21300000, guid: 52882c395e40c8844adccf501c7b8272, type: 3}
   idle: {fileID: 0}
   running: {fileID: 0}
-  posX: -4
-  posY: 5
+  posX: 0
+  posY: 0
+  maxHealth: 100
   health: 100
-  vitaminC: 100

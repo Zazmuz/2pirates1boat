@@ -58,7 +58,6 @@ public class HullBreachParent : MonoBehaviour
         if(gameInformation.gameStarted){
             isSpawning = true;
             yield return new WaitForSeconds(gameInformation.timeTilNewBreach);
-            Debug.Log("hey wtf");
             SpawnHullBreach();
             isSpawning = false;
         }
