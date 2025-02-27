@@ -9,6 +9,7 @@ TagManager:
   - Interact
   - Item
   - Death
+  - Enemy
   layers:
   - Default
   - TransparentFX
