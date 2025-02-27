@@ -4,6 +4,8 @@ using UnityEngine;
 public class GameState : MonoBehaviour
 {
     public MainSceneCamera camera;
+    public PlayerInformation player1;
+    public PlayerInformation player2;
     public GameInformation gameInformation;
     public MoveShip moveShip;
     private SharedDeviceInputManager sharedDeviceInputManager;
@@ -11,10 +13,11 @@ public class GameState : MonoBehaviour
     public Vector2 startPosition;
     public Vector2 inViewPosition;
     public Vector2 atDestinationPosition;
-
     public GamePhase currentPhase = GamePhase.Waiting;
 
     void Awake(){
+        player1.ResetStats();
+        player2.ResetStats();
         gameInformation.ResetGame();
     }
 

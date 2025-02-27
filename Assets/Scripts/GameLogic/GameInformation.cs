@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -11,6 +12,9 @@ public class GameInformation : ScriptableObject{
     [Header("Helm Settings")]
     public float helmModifier = 1f; // Reduce time per second when at helm
     public bool playerAtHelm = false;
+    [Header("Pump Settings")]
+    public float pumpModifier = 1f;
+    public bool playerAtPump = false;
 
     [Header("Hull Breaches")]
     [Range(0,5)]public int numberOfHullBreaches;
@@ -33,6 +37,13 @@ public class GameInformation : ScriptableObject{
     public void SetCurrentWater(float amount){
         currentWater = amount;
         CheckWaterLevel();
+    }
+    public void UpdateWaterTimer(){
+    if (playerAtPump && currentWater > 0) {
+            Debug.Log("Pumping water...");
+            //ModifyWater(-pumpModifier * Time.deltaTime); // Decrease water level over time
+            SetCurrentWater(Mathf.Lerp(currentWater, 0, Time.deltaTime)); // Lerp water level to 0
+        }
     }
     public void ModifyWater(float amount)
     {
@@ -74,6 +85,9 @@ public class GameInformation : ScriptableObject{
     public void PlayerAtTheHelm(bool isAtHelm) {
         playerAtHelm = isAtHelm;
     }
+    public void PlayerAtThePump(bool isAtPump) {
+        playerAtPump = isAtPump;
+    }
 
     public void UpdateTimer() {
         if (playerAtHelm) {
@@ -81,6 +95,10 @@ public class GameInformation : ScriptableObject{
         }
 
         timeTilDestination = Mathf.Clamp(timeTilDestination, 0, 120f); // Prevent negative time
+    }
+
+    public void SetTimeTilDestination(float time) {
+        timeTilDestination = time;
     }
 
 

@@ -86,7 +86,7 @@ public class HullBreachParent : MonoBehaviour
             spawnPointHullBreaches[spawnPoint] = newBreach;
             gameInformation.numberOfHullBreaches++;
 
-            Debug.Log($"Hull breach spawned at {spawnPoint.position}");
+            //Debug.Log($"Hull breach spawned at {spawnPoint.position}");
         }
     }
     public void RemoveHullBreach(GameObject breach)

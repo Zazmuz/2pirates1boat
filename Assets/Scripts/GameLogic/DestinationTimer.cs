@@ -56,14 +56,12 @@ public class DestinationTimer : GameTimers
             float dynamicTimeRemaining = gameInformation.timeTilDestination;
 
             // Ensure we don't divide by zero
-            if (dynamicTimeRemaining > 0)
-            {
+            if (dynamicTimeRemaining > 0){
                 progressBar.value = Mathf.Clamp01(elapsedTime / dynamicTimeRemaining);
             }
 
             // If progress bar reaches 100%, set destination reached
-            if (progressBar.value >= 1f)
-            {
+            if (progressBar.value >= 1f){
                 gameInformation.atDestination = true;
                 progressBar.enabled = false;
                 progressCoroutine = null;

@@ -14,14 +14,13 @@ public class StationInteract : MonoBehaviour
     }
     private void Update(){
         if(inInteractZone){
-            Debug.Log("In interact zone");
+            //Debug.Log("In interact zone");
             inZone.UniqueBehaviour(currentPlayerInput);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Interact")) {
             inZone = collision.GetComponent<ZoneBehaviour>();
-            Debug.Log("In interact zone");
             if (inZone != null) {
                 inInteractZone = true;
             } else {
