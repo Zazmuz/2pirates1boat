@@ -15,8 +15,11 @@ public class MatchCameraRotation : MonoBehaviour
 
     void Update(){
         if (targetCamera != null)
-        {
-            transform.rotation = targetCamera.transform.rotation;
+        {   
+            MatchRotation();
         }
+    }
+    void MatchRotation(){
+        transform.rotation = targetCamera.transform.rotation;
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class GameState : MonoBehaviour
 {
+    public MainSceneCamera camera;
     public GameInformation gameInformation;
     public MoveShip moveShip;
     private SharedDeviceInputManager sharedDeviceInputManager;
@@ -36,11 +37,13 @@ public class GameState : MonoBehaviour
 
         if (currentPhase == GamePhase.Running)
         {
+            float swayValue = Mathf.Lerp(camera.swayAmount, 1.5f, Time.deltaTime * 2f);
             if (gameInformation.atDestination)
             {
                 StartCoroutine(MoveShipToDestination(0f));
                 gameInformation.gameStarted = false;
                 gameInformation.isSpawningHullBreaches = false;
+                StartCoroutine(StopSway());
                 currentPhase = GamePhase.AtDestination;
             }
         }
@@ -101,5 +104,20 @@ public class GameState : MonoBehaviour
         Running,
         ShipMovingOut,
         AtDestination
+    }
+        // Coroutine to gradually reduce sway
+    IEnumerator StopSway(){
+        float duration = 2f; // Time to stop sway
+        float elapsed = 0f;
+        float startSway = camera.swayAmount;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            camera.swayAmount = Mathf.Lerp(startSway, 0f, elapsed / duration);
+            yield return null;
+        }
+
+        camera.swayAmount = 0f; // Ensure it reaches 0 exactly
     }
 }

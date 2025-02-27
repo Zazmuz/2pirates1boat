@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5b342c872400340abb80b666f32da8, type: 3}
   m_Name: GameLogic
   m_EditorClassIdentifier: 
-  timeTilDestination: 60
+  timeTilDestination: 3.0121343
   timeTilNewBreach: 5
   helmModifier: 1
   playerAtHelm: 0
