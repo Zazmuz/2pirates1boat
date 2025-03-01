@@ -16,15 +16,15 @@ MonoBehaviour:
   timeTilNewBreach: 5
   helmModifier: 1
   playerAtHelm: 0
-  pumpModifier: 30
+  pumpModifier: 3
   playerAtPump: 0
-  numberOfHullBreaches: 4
+  numberOfHullBreaches: 5
   maxHullBreaches: 5
   maxWater: 100
-  currentWater: 100
+  currentWater: 31.36778
   players: []
   isSpawningHullBreaches: 1
-  isGameOver: 1
+  isGameOver: 0
   atDestination: 0
   gameStarted: 1
   timeToGame: 0

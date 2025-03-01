@@ -41,8 +41,8 @@ public class GameInformation : ScriptableObject{
     public void UpdateWaterTimer(){
     if (playerAtPump && currentWater > 0) {
             Debug.Log("Pumping water...");
-            //ModifyWater(-pumpModifier * Time.deltaTime); // Decrease water level over time
-            SetCurrentWater(Mathf.Lerp(currentWater, 0, Time.deltaTime)); // Lerp water level to 0
+            ModifyWater(-pumpModifier * Time.deltaTime); // Decrease water level over time
+            //SetCurrentWater(Mathf.Lerp(currentWater, 0, Time.deltaTime)); // Lerp water level to 0
         }
     }
     public void ModifyWater(float amount)

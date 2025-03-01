@@ -9,7 +9,7 @@ public abstract class ZoneBehaviour : MonoBehaviour
     public virtual void EnterZone(){
         Debug.Log($"Entering {zoneName}");
     }
-
+    
     public abstract void UniqueBehaviour(InputManager currentPlayerInput);
     public abstract void OnLeavingZone();
 }

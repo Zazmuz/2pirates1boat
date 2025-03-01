@@ -40,7 +40,8 @@ public class GameState : MonoBehaviour
 
         if (currentPhase == GamePhase.Running)
         {
-            float swayValue = Mathf.Lerp(camera.swayAmount, 1.5f, Time.deltaTime * 2f);
+            player1.ModifyVitaminC(-player1.vitaminCDrainRate * Time.deltaTime);
+            player2.ModifyVitaminC(-player2.vitaminCDrainRate * Time.deltaTime);
             if (gameInformation.atDestination)
             {
                 StartCoroutine(MoveShipToDestination(0f));
@@ -96,6 +97,7 @@ public class GameState : MonoBehaviour
             currentPhase = GamePhase.ShipMovingIn;
             moveShip.Move(atDestinationPosition, inViewPosition, 3f);
             gameInformation.atDestination = false;
+            StartCoroutine(StartSway());
             yield return new WaitForSeconds(delay);
         }
     }
@@ -122,5 +124,19 @@ public class GameState : MonoBehaviour
         }
 
         camera.swayAmount = 0f; // Ensure it reaches 0 exactly
+    }
+    IEnumerator StartSway(){
+        float duration = 2f; // Time to start sway
+        float elapsed = 0f;
+        float startSway = camera.swayAmount;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            camera.swayAmount = Mathf.Lerp(startSway, 1.5f, elapsed / duration);
+            yield return null;
+        }
+
+        camera.swayAmount = 1.5f; // Ensure it reaches 1.5 exactly
     }
 }

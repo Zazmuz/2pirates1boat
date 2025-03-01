@@ -13,8 +13,9 @@ public class PlayerInformation : ScriptableObject
     public float posY;
 
     [Header("Gameplay")]
-    private float health;
-    private float vitaminC;
+    public float health;
+    public float vitaminC;
+    public float vitaminCDrainRate = 0.1f;
     
     public void ModifyHealth(float amount)
     {
