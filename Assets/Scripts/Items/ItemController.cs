@@ -13,8 +13,6 @@ public class ItemController : MonoBehaviour
     void Start(){
         playerItemManager = GetComponent<PlayerItemManager>();
         inputManager = GetComponent<InputManager>();
-
-        itemObject = GameObject.Find("PlayerItemManager");
         weaponCollider = GetComponentInChildren<CircleCollider2D>();
     }
     void Update(){

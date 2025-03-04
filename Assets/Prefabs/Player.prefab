@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2da5232806c4b4eb6be70bb614fdc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemObject: {fileID: 0}
+  itemObject: {fileID: 4949462360746994417}
   swingDuration: 0.2
 --- !u!114 &96064984501560644
 MonoBehaviour:
