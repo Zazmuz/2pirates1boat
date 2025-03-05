@@ -9,6 +9,7 @@ TagManager:
   - Interact
   - Item
   - Death
+  - Ship
   layers:
   - Default
   - TransparentFX

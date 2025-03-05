@@ -3374,7 +3374,7 @@ GameObject:
   - component: {fileID: 1074255161}
   m_Layer: 6
   m_Name: Tilemap_Ship
-  m_TagString: Untagged
+  m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5566,7 +5566,6 @@ GameObject:
   - component: {fileID: 1295561667}
   - component: {fileID: 1295561666}
   - component: {fileID: 1295561668}
-  - component: {fileID: 1295561669}
   m_Layer: 0
   m_Name: GameInformation
   m_TagString: Untagged
@@ -5653,20 +5652,6 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &1295561669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1295561665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8183be3e1d75c0b4c9e4819ffc15b54c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameInformation: {fileID: 11400000, guid: 176b728f4b16aec45a739440c6000b26, type: 2}
-  respawnSpot: {fileID: 1492470147}
 --- !u!1 &1357647411
 GameObject:
   m_ObjectHideFlags: 0
@@ -6032,7 +6017,7 @@ GameObject:
   - component: {fileID: 1492470148}
   m_Layer: 5
   m_Name: victoryText
-  m_TagString: Untagged
+  m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
