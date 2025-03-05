@@ -22,6 +22,8 @@ public class GameInformation : ScriptableObject{
     public bool gameStarted;
     public bool timeToGame;
     public bool isCutscene;
+    public int playerCount = 0;
+
     public float GetCurrentWater(){
         return currentWater;
     }

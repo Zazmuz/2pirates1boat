@@ -79,7 +79,7 @@ public class GameState : MonoBehaviour
         sharedDeviceInputManager.enabled = true;
         sharedDeviceInputManager.ManuallyJoinPlayer();
         Debug.Log("Player count: " + sharedDeviceInputManager.playerCount);
-        if (sharedDeviceInputManager.playerCount >= 2)
+        if (gameInformation.playerCount >= 2)
         {
             sharedDeviceInputManager.ManuallyJoinPlayer();
         }
