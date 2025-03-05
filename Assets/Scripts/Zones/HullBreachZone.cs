@@ -30,7 +30,19 @@ public class HullBreachZone : ZoneBehaviour
         hullBreachParent = GetComponentInParent<HullBreachParent>();
         
         canvas.enabled = false;
+
+        SetZoneSize();
     }
+
+        void SetZoneSize()
+    {
+        BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
+        if (boxCollider != null)
+        {
+            boxCollider.size = new Vector2(2, 2);
+        }
+    }
+
     public override void OnLeavingZone(){
         currentPlayerInZone = null;
         if(progressCoroutine != null){
