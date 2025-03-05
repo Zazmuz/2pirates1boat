@@ -4558,6 +4558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sharedDeviceInputManager: {fileID: 1872230700}
+  gameInformation: {fileID: 11400000, guid: 176b728f4b16aec45a739440c6000b26, type: 2}
 --- !u!1 &1856401823
 GameObject:
   m_ObjectHideFlags: 0
