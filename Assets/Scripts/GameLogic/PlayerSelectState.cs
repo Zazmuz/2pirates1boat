@@ -8,7 +8,7 @@ public class PlayerSelectState : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-        if(sharedDeviceInputManager.playerCount >= 2 && Input.GetKeyDown(KeyCode.Space)){
+        if(sharedDeviceInputManager.playerCount >= 1 && Input.GetKeyDown(KeyCode.Space)){
             SceneChanger.ChangeScene("Game");
         }
     }

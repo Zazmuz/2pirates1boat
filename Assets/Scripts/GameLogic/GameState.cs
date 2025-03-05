@@ -78,7 +78,11 @@ public class GameState : MonoBehaviour
         gameInformation.StartGame();
         sharedDeviceInputManager.enabled = true;
         sharedDeviceInputManager.ManuallyJoinPlayer();
-        sharedDeviceInputManager.ManuallyJoinPlayer();
+        Debug.Log("Player count: " + sharedDeviceInputManager.playerCount);
+        if (sharedDeviceInputManager.playerCount >= 2)
+        {
+            sharedDeviceInputManager.ManuallyJoinPlayer();
+        }
     }
 
     private IEnumerator MoveShipInViewStart(float delay)
