@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameState : MonoBehaviour
 {
@@ -13,8 +14,10 @@ public class GameState : MonoBehaviour
 
     public GamePhase currentPhase = GamePhase.Waiting;
 
+    public Canvas victoryCanvas;
     void Awake(){
         gameInformation.ResetGame();
+        victoryCanvas.enabled = false;
     }
 
     void Start(){
@@ -47,6 +50,12 @@ public class GameState : MonoBehaviour
         if (currentPhase == GamePhase.AtDestination)
         {
             StartCoroutine(MoveShipFromDestination(2f));
+            ShowVictoryScreen();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space)  && (currentPhase == GamePhase.AtDestination || currentPhase == GamePhase.ShipMovingIn))
+        {
+            RestartGame();
         }
     }
 
@@ -96,6 +105,33 @@ public class GameState : MonoBehaviour
             gameInformation.atDestination = false;
             yield return new WaitForSeconds(delay);
         }
+    }
+
+    private void ShowVictoryScreen()
+    {
+        victoryCanvas.enabled = true;
+        //victoryText.text = "You Win!";
+    }
+
+    private void RestartGame()
+    {   
+        Debug.Log("Restarting game");
+        Debug.Log("Restarting game");
+        Debug.Log("Restarting game");
+        Debug.Log("Restarting game");
+        Debug.Log("Restarting game");
+        Debug.Log("Restarting game");
+        
+
+
+        SceneChanger.ChangeScene("MainMenu");
+        Debug.Log("Restarting game");
+        //victoryCanvas.enabled = false;
+        //ameInformation.ResetGame();
+        //moveShip.ResetPosition(startPosition);
+        //sharedDeviceInputManager.enabled = false;
+        //currentPhase = GamePhase.Waiting;
+        //StartCoroutine(MoveShipInViewStart(0f));
     }
 
     public enum GamePhase

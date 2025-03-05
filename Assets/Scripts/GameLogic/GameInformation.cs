@@ -5,12 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Game")]
 public class GameInformation : ScriptableObject{
     [Header("Timers")]
-    [Range(1f,120f)] public float timeTilDestination = 5f;
+    [Range(1f,120f)] public float timeTilDestination = 5f; // 5
     [Range(1f,10f)] public float timeTilNewBreach = 5f; //should be randomized every time new breach spawns
     [Header("Hull Breaches")]
     [Range(0,5)]public int numberOfHullBreaches;
     [Range(0,10)]public int maxHullBreaches;
-    [Range(1f,100f)] public float maxWater = 100f;
+    [Range(1f,100f)] public float maxWater = 100f; // 100
     [Range(1f,100f)] [SerializeField] private float currentWater = 0f;
     [Header("Players")]
     [SerializeField] private List<GameObject> players = new List<GameObject>();
