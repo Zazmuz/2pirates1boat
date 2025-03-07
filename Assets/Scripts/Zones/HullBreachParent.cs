@@ -44,6 +44,7 @@ public class HullBreachParent : MonoBehaviour
             new Vector3(5.5f, -4, 0),
             new Vector3(-6.5f, -4, 0),
             new Vector3(-15f, 5f, 0)
+            new Vector3(-7f, 1f, 0)
         };
 
         spawnPoints = new Transform[gridPositions.Length];
