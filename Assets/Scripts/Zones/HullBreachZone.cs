@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,7 +36,7 @@ public class HullBreachZone : ZoneBehaviour
         SetZoneSize();
     }
 
-        void SetZoneSize()
+    void SetZoneSize()
     {
         BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
         if (boxCollider != null)
@@ -53,8 +52,8 @@ public class HullBreachZone : ZoneBehaviour
             progressCoroutine = null;
             ResetProgressBar();
         }
-
     }
+
     public override void UniqueBehaviour(InputManager currentPlayerInput){
         if(currentPlayerInZone == null){
             currentPlayerInZone = currentPlayerInput;
@@ -66,7 +65,7 @@ public class HullBreachZone : ZoneBehaviour
             AddPlanks();
         }
         if (hasPlanks && currentPlayerInZone != null && currentPlayerInZone.InteractIsHeld){
-            if (playerItemManager.GetHeldItem() != null && playerItemManager.GetHeldItem().name == "Hammer"){
+            if (playerItemManager.GetHeldItem() != null && playerItemManager.GetHeldItem().itemName == "Hammer"){
                 if(progressCoroutine == null){
                     progressCoroutine = StartCoroutine(FillProgressBar());
                 }
@@ -80,14 +79,16 @@ public class HullBreachZone : ZoneBehaviour
             }
         }
     }
+
     private void AddPlanks(){
-        if(!hasPlanks && playerItemManager.GetHeldItem().name == "Plank"){
+        if(!hasPlanks && playerItemManager.GetHeldItem().itemName == "Plank"){
             hasPlanks = true;
             spriteRenderer.sprite = zoneStats.altSprite; //changes to the sprite with da planks
 
             playerItemManager.DropHeldItem();
         }
     }
+
     private IEnumerator FillProgressBar(){     
         canvas.enabled = true; 
         progressBar.enabled = true;
@@ -104,8 +105,10 @@ public class HullBreachZone : ZoneBehaviour
         progressBar.enabled = false;
         hullBreachParent.RemoveHullBreach(gameObject);
 
+        // Update hammer durability and hammer damage bar
         playerItemManager.UseItem();
-        hammerDamageBar.value++;
+        hammerDamageBar.value = 3 - playerItemManager.GetHeldItem().durability;
+
         Destroy(gameObject);
     }
 
