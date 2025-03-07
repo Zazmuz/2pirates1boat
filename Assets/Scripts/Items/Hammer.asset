@@ -16,3 +16,4 @@ MonoBehaviour:
   itemName: Hammer
   itemType: 1
   ActionType: 2
+  durability: 3

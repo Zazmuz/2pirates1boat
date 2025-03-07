@@ -12,6 +12,7 @@ public class Item : ScriptableObject
     public string itemName;
     public ItemType itemType;
     public ActionType ActionType;
+    public int durability;
 }
 
 public enum ItemType{

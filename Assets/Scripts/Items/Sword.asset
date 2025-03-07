@@ -16,3 +16,4 @@ MonoBehaviour:
   itemName: Sword
   itemType: 0
   ActionType: 0
+  durability: 3

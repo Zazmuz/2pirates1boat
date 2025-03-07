@@ -18,6 +18,7 @@ public class HullBreachZone : ZoneBehaviour
     private float interactionTime;
     private bool hasPlanks;
     
+    private Slider hammerDamageBar;
     void Start()
     {
         hasPlanks = false;
@@ -26,10 +27,12 @@ public class HullBreachZone : ZoneBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         canvas = GetComponentInChildren<Canvas>();
         progressBar = GetComponentInChildren<Slider>();
+        hammerDamageBar = GetComponentInChildren<Slider>();
 
         hullBreachParent = GetComponentInParent<HullBreachParent>();
         
         canvas.enabled = false;
+        hammerDamageBar.maxValue = 3;
 
         SetZoneSize();
     }
@@ -100,6 +103,9 @@ public class HullBreachZone : ZoneBehaviour
 
         progressBar.enabled = false;
         hullBreachParent.RemoveHullBreach(gameObject);
+
+        playerItemManager.UseItem();
+        hammerDamageBar.value++;
         Destroy(gameObject);
     }
 
