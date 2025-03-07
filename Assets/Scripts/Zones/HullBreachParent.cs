@@ -36,18 +36,22 @@ public class HullBreachParent : MonoBehaviour
             return;
         }
 
-        spawnPoints = new Transform[5];
 
         Vector3[] gridPositions = { //this is insane, fuckugly pos can someone do this clean would be sick.
             new Vector3(-11.5f, 1, 0),
             new Vector3(5.5f, 0, 0),
             new Vector3(-11.5f, -4, 0),
             new Vector3(5.5f, -4, 0),
-            new Vector3(-6.5f, -4, 0)
+            new Vector3(-6.5f, -4, 0),
+            new Vector3(-15f, 5f, 0)
         };
+
+        spawnPoints = new Transform[gridPositions.Length];
+
 
         for (int i = 0; i < gridPositions.Length; i++)
         {
+            Debug.Log("SpawnPoint" + (i + 1));
             GameObject spawnPointObj = new GameObject("SpawnPoint" + (i + 1));
             spawnPointObj.transform.position = gridPositions[i];
             spawnPoints[i] = spawnPointObj.transform;
