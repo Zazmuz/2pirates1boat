@@ -49,11 +49,11 @@ public class GameState : MonoBehaviour
         }
         if (currentPhase == GamePhase.AtDestination)
         {
-            StartCoroutine(MoveShipFromDestination(2f));
+            // StartCoroutine(MoveShipFromDestination(2f));
             ShowVictoryScreen();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)  && (currentPhase == GamePhase.AtDestination || currentPhase == GamePhase.ShipMovingIn))
+        if (Input.GetKeyDown(KeyCode.Space)  && (currentPhase == GamePhase.AtDestination || currentPhase == GamePhase.ShipMovingOut))
         {
             RestartGame();
         }
@@ -100,7 +100,7 @@ public class GameState : MonoBehaviour
         moveShip.Move(inViewPosition, atDestinationPosition, 3f);
     }
 
-    private IEnumerator MoveShipFromDestination(float delay)
+    private IEnumerator OLD_MoveShipFromDestination(float delay)
     {
         
         if (gameInformation.atDestination && Input.GetKey(KeyCode.Space)){

@@ -18,6 +18,9 @@ public class HullBreachZone : ZoneBehaviour
     private bool hasPlanks;
     
     private Slider hammerDamageBar;
+    private GameObject hammerDamageBarInstance;
+    public GameObject hammerDamageBarPrefab;
+
     void Start()
     {
         hasPlanks = false;
@@ -26,14 +29,22 @@ public class HullBreachZone : ZoneBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         canvas = GetComponentInChildren<Canvas>();
         progressBar = GetComponentInChildren<Slider>();
-        hammerDamageBar = GetComponentInChildren<Slider>();
 
         hullBreachParent = GetComponentInParent<HullBreachParent>();
         
         canvas.enabled = false;
-        hammerDamageBar.maxValue = 3;
 
         SetZoneSize();
+    }
+
+    void Update()
+    {
+        if (currentPlayerInZone != null && hammerDamageBarInstance != null)
+        {
+            // Update the position of the hammer damage bar to be above the player
+            Vector3 playerPosition = currentPlayerInZone.transform.position;
+            hammerDamageBarInstance.transform.position = playerPosition + new Vector3(0, 1.5f, 0);
+        }
     }
 
     void SetZoneSize()
@@ -52,11 +63,21 @@ public class HullBreachZone : ZoneBehaviour
             progressCoroutine = null;
             ResetProgressBar();
         }
+        if (hammerDamageBarInstance != null)
+        {
+            Destroy(hammerDamageBarInstance);
+        }
     }
 
     public override void UniqueBehaviour(InputManager currentPlayerInput){
         if(currentPlayerInZone == null){
             currentPlayerInZone = currentPlayerInput;
+            // Instantiate the hammer damage bar and attach it to the player
+            hammerDamageBarInstance = Instantiate(hammerDamageBarPrefab);
+            hammerDamageBar = hammerDamageBarInstance.GetComponentInChildren<Slider>();
+            hammerDamageBar.maxValue = 3;
+            hammerDamageBar.value = 3; // Initialize hammer damage bar value
+            hammerDamageBarInstance.SetActive(true);
         }
 
         playerItemManager = currentPlayerInput.GetComponentInParent<PlayerItemManager>();
@@ -103,12 +124,19 @@ public class HullBreachZone : ZoneBehaviour
         }
 
         progressBar.enabled = false;
-        hullBreachParent.RemoveHullBreach(gameObject);
 
         // Update hammer durability and hammer damage bar
-        playerItemManager.UseItem();
-        hammerDamageBar.value = 3 - playerItemManager.GetHeldItem().durability;
+        if (playerItemManager.GetHeldItem() != null)
+        {
+            playerItemManager.UseItem();
+            if (hammerDamageBar != null)
+            {
+                hammerDamageBar.value = playerItemManager.GetHeldItem().durability;
+            }
+        }
 
+        // Remove the hull breach
+        hullBreachParent.RemoveHullBreach(gameObject);
         Destroy(gameObject);
     }
 
