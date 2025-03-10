@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeTilDestination: 42
   timeTilNewBreach: 5
-  numberOfHullBreaches: 5
+  numberOfHullBreaches: 0
   maxHullBreaches: 5
   maxWater: 100
-  currentWater: 100
+  currentWater: 1
   players: []
-  isSpawningHullBreaches: 1
-  isGameOver: 1
+  isSpawningHullBreaches: 0
+  isGameOver: 0
   atDestination: 0
-  gameStarted: 1
+  gameStarted: 0
   timeToGame: 0
   isCutscene: 0

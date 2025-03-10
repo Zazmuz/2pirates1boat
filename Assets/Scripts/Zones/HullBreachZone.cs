@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +17,10 @@ public class HullBreachZone : ZoneBehaviour
     private float interactionTime;
     private bool hasPlanks;
     
+    private Slider hammerDamageBar;
+    private GameObject hammerDamageBarInstance;
+    public GameObject hammerDamageBarPrefab;
+
     void Start()
     {
         hasPlanks = false;
@@ -30,7 +33,29 @@ public class HullBreachZone : ZoneBehaviour
         hullBreachParent = GetComponentInParent<HullBreachParent>();
         
         canvas.enabled = false;
+
+        SetZoneSize();
     }
+
+    void Update()
+    {
+        if (currentPlayerInZone != null && hammerDamageBarInstance != null)
+        {
+            // Update the position of the hammer damage bar to be above the player
+            Vector3 playerPosition = currentPlayerInZone.transform.position;
+            hammerDamageBarInstance.transform.position = playerPosition + new Vector3(0, 1.5f, 0);
+        }
+    }
+
+    void SetZoneSize()
+    {
+        BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
+        if (boxCollider != null)
+        {
+            boxCollider.size = new Vector2(2, 2);
+        }
+    }
+
     public override void OnLeavingZone(){
         currentPlayerInZone = null;
         if(progressCoroutine != null){
@@ -38,11 +63,21 @@ public class HullBreachZone : ZoneBehaviour
             progressCoroutine = null;
             ResetProgressBar();
         }
-
+        if (hammerDamageBarInstance != null)
+        {
+            Destroy(hammerDamageBarInstance);
+        }
     }
+
     public override void UniqueBehaviour(InputManager currentPlayerInput){
         if(currentPlayerInZone == null){
             currentPlayerInZone = currentPlayerInput;
+            // Instantiate the hammer damage bar and attach it to the player
+            hammerDamageBarInstance = Instantiate(hammerDamageBarPrefab);
+            hammerDamageBar = hammerDamageBarInstance.GetComponentInChildren<Slider>();
+            hammerDamageBar.maxValue = 3;
+            hammerDamageBar.value = 3; // Initialize hammer damage bar value
+            hammerDamageBarInstance.SetActive(true);
         }
 
         playerItemManager = currentPlayerInput.GetComponentInParent<PlayerItemManager>();
@@ -51,7 +86,7 @@ public class HullBreachZone : ZoneBehaviour
             AddPlanks();
         }
         if (hasPlanks && currentPlayerInZone != null && currentPlayerInZone.InteractIsHeld){
-            if (playerItemManager.GetHeldItem() != null && playerItemManager.GetHeldItem().name == "Hammer"){
+            if (playerItemManager.GetHeldItem() != null && playerItemManager.GetHeldItem().itemName == "Hammer"){
                 if(progressCoroutine == null){
                     progressCoroutine = StartCoroutine(FillProgressBar());
                 }
@@ -65,14 +100,16 @@ public class HullBreachZone : ZoneBehaviour
             }
         }
     }
+
     private void AddPlanks(){
-        if(!hasPlanks && playerItemManager.GetHeldItem().name == "Plank"){
+        if(!hasPlanks && playerItemManager.GetHeldItem().itemName == "Plank"){
             hasPlanks = true;
             spriteRenderer.sprite = zoneStats.altSprite; //changes to the sprite with da planks
 
             playerItemManager.DropHeldItem();
         }
     }
+
     private IEnumerator FillProgressBar(){     
         canvas.enabled = true; 
         progressBar.enabled = true;
@@ -87,6 +124,18 @@ public class HullBreachZone : ZoneBehaviour
         }
 
         progressBar.enabled = false;
+
+        // Update hammer durability and hammer damage bar
+        if (playerItemManager.GetHeldItem() != null)
+        {
+            playerItemManager.UseItem();
+            if (hammerDamageBar != null)
+            {
+                hammerDamageBar.value = playerItemManager.GetHeldItem().durability;
+            }
+        }
+
+        // Remove the hull breach
         hullBreachParent.RemoveHullBreach(gameObject);
         Destroy(gameObject);
     }

@@ -16,3 +16,4 @@ MonoBehaviour:
   itemName: Plank
   itemType: 2
   ActionType: 2
+  durability: 1

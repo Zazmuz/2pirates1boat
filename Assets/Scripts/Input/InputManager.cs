@@ -28,8 +28,15 @@ public class InputManager : MonoBehaviour
         _moveAction = playerInput.actions["Move"];
         _jumpAction = playerInput.actions["Jump"];
         _runAction = playerInput.actions["Run"];
-        _interactAction = playerInput.actions["Interact"];
-        _dropItemAction = playerInput.actions["Drop Item"];
+        if (playerInput.playerIndex == 0) {
+            _interactAction = playerInput.actions["Interact"];
+            _dropItemAction = playerInput.actions["Drop Item"];
+        } else {
+            _interactAction = playerInput.actions["Drop Item"];
+            _dropItemAction = playerInput.actions["Interact"];
+        }
+        // _interactAction = playerInput.actions["Interact"];
+        // _dropItemAction = playerInput.actions["Drop Item"];
 
     }
 
