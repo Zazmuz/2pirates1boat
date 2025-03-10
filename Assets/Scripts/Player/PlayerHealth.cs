@@ -12,6 +12,8 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth;
     private Transform respawnSpot;
     private Transform boat;
+    public GameObject healthbar;
+    private GameObject myHealthBar;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,12 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxhealth;
         respawnSpot = GameObject.FindWithTag("Respawn").transform;
         boat = GameObject.FindWithTag("Ship").transform;
+
+        myHealthBar = Instantiate(healthbar, new Vector3(0, 0, 0), Quaternion.identity);
+        FollowPlayer playerFollowScript = myHealthBar.GetComponent<FollowPlayer>();
+        playerFollowScript.playerTransform = this.gameObject.transform;
+        HealthBar hpBarObject = myHealthBar.GetComponent<HealthBar>();
+        hpBarObject.playerHealth = this;
 
         if (respawnSpot == null)
         {
@@ -52,5 +60,10 @@ public class PlayerHealth : MonoBehaviour
         {
             Debug.LogError("Respawn spot or Boat not found!");
         }
+    }
+
+    void OnDestroy()
+    {
+        Destroy(myHealthBar);
     }
 }
