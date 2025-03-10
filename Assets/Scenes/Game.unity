@@ -2738,8 +2738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46b031db276fd174ab75b2dda7ee5c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  playerHealth: {fileID: 0}
+  damagePerSecond: 50
 --- !u!61 &395953002
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2747,7 +2746,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 395952997}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:

@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
     [Header("max health")]
     [Range(1,100)] public int maxhealth = 100;
     
-    public int currentHealth;
+    public float currentHealth;
     private Transform respawnSpot;
     private Transform boat;
 
@@ -31,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         if (currentHealth <= 0)

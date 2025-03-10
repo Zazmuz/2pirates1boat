@@ -41,7 +41,8 @@ public class EnemyPatrol : MonoBehaviour
 
     private void ChasePlayer()
     {
-        transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, movementSpeed * Time.deltaTime * 1.5F);
+        Vector2 targetPosition = new Vector2(playerTransform.position.x, transform.position.y);
+        transform.position = Vector2.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime * 1.5F);
 
         // Flip enemy based on player's position
         if (playerTransform.position.x > transform.position.x)

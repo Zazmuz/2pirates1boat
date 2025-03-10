@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class EnemyDamage : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public int damage;
-    public PlayerHealth playerHealth;
-    
+    public int damagePerSecond = 10; // Damage per second
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
-            playerHealth.TakeDamage(damage);
+            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                //Debug.Log("PLAYER TAKE DAMAGE");
+                playerHealth.TakeDamage(damagePerSecond * Time.deltaTime);
+            }
         }
     }
 }
