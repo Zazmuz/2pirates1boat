@@ -23,7 +23,7 @@ public class HullBreachZone : ZoneBehaviour
     private GameObject hammerDamageBarInstance;
     public GameObject hammerDamageBarPrefab;
 
-    void Start()
+    void Awake()
     {
         hasPlanks = false;
         zoneName = zoneStats.name;   
@@ -54,7 +54,7 @@ public class HullBreachZone : ZoneBehaviour
         BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
         if (boxCollider != null)
         {
-            boxCollider.size = new Vector2(2, 2);
+            boxCollider.size = new Vector2(2.5f, 2.5f);
         }
     }
 
