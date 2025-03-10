@@ -7,6 +7,7 @@ public class WaterTimer : MonoBehaviour
     private Canvas canvas;
     private Slider progressBar;
     public GameInformation gameInformation;
+    public WaterFill waterFillScript;
     private float maxWater;
     private Transform waterTransform;
     private bool[] shakeTriggered = new bool[5];
@@ -64,6 +65,7 @@ public class WaterTimer : MonoBehaviour
                 gameInformation.ModifyWater(Time.deltaTime * gameInformation.numberOfHullBreaches);
                 float waterLevel = gameInformation.GetCurrentWater() / maxWater;
                 progressBar.value = waterLevel;
+                waterFillScript.SetFillAmount(waterLevel);
 
                 CheckShake(waterLevel);
             }
