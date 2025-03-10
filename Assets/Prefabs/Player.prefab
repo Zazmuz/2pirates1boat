@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2698056629151796001}
   - component: {fileID: 2332698706394150115}
   - component: {fileID: 8880700947403005981}
+  - component: {fileID: 6021009382243648057}
   - component: {fileID: 2539242452365663778}
   - component: {fileID: 2043085097357904396}
   - component: {fileID: 793303121404003952}
@@ -123,6 +124,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &6021009382243648057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276682014506913379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ab1bcdebc4689340b7f87eecbd88821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameInformation: {fileID: 11400000, guid: 176b728f4b16aec45a739440c6000b26, type: 2}
+  maxhealth: 100
+  currentHealth: 0
 --- !u!114 &2539242452365663778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,6 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameInformation: {fileID: 11400000, guid: 176b728f4b16aec45a739440c6000b26, type: 2}
+  respawnSpot: {fileID: 0}
 --- !u!1 &1266567310393971094
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +386,7 @@ GameObject:
   - component: {fileID: 2944448862789822895}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -520,7 +537,7 @@ GameObject:
   - component: {fileID: 3502973141062258284}
   m_Layer: 0
   m_Name: Feet
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
