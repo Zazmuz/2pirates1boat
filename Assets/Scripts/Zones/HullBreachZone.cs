@@ -2,10 +2,12 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
 public class HullBreachZone : ZoneBehaviour
 {
     public HullBreachParent hullBreachParent;
+    public TutorialManager tutorialManager;
     private Slider progressBar;
     private Canvas canvas;
     public PlayerMovement player;
@@ -21,7 +23,7 @@ public class HullBreachZone : ZoneBehaviour
     private GameObject hammerDamageBarInstance;
     public GameObject hammerDamageBarPrefab;
 
-    void Start()
+    void Awake()
     {
         hasPlanks = false;
         zoneName = zoneStats.name;   
@@ -52,7 +54,7 @@ public class HullBreachZone : ZoneBehaviour
         BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
         if (boxCollider != null)
         {
-            boxCollider.size = new Vector2(2, 2);
+            boxCollider.size = new Vector2(2.5f, 2.5f);
         }
     }
 
@@ -116,12 +118,13 @@ public class HullBreachZone : ZoneBehaviour
         float elapsedTime = 0f;
         progressBar.value = 0f;
         interactionTime = zoneStats.interactionTime;
-
+        Debug.Log("start fill progress bar");
         while (elapsedTime < interactionTime){
             elapsedTime += Time.deltaTime;
             progressBar.value = elapsedTime / interactionTime;
             yield return null;
         }
+        Debug.Log("asdqwe");
 
         progressBar.enabled = false;
 
@@ -136,7 +139,15 @@ public class HullBreachZone : ZoneBehaviour
         }
 
         // Remove the hull breach
-        hullBreachParent.RemoveHullBreach(gameObject);
+        if (hullBreachParent != null)
+        {
+            hullBreachParent.RemoveHullBreach(gameObject);
+        }
+        if (tutorialManager != null)
+        {
+            tutorialManager.RemoveHullBreach();
+        }
+
         Destroy(gameObject);
     }
 
