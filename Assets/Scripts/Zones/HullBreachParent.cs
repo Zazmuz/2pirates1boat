@@ -36,15 +36,19 @@ public class HullBreachParent : MonoBehaviour
             return;
         }
 
-        spawnPoints = new Transform[5];
 
         Vector3[] gridPositions = { //this is insane, fuckugly pos can someone do this clean would be sick.
             new Vector3(-11.5f, 1, 0),
             new Vector3(5.5f, 0, 0),
             new Vector3(-11.5f, -4, 0),
             new Vector3(5.5f, -4, 0),
-            new Vector3(-6.5f, -4, 0)
+            new Vector3(-6.5f, -4, 0),
+            new Vector3(-15f, 5f, 0),
+            new Vector3(-7f, 1f, 0)
         };
+
+        spawnPoints = new Transform[gridPositions.Length];
+
 
         for (int i = 0; i < gridPositions.Length; i++)
         {
@@ -58,7 +62,6 @@ public class HullBreachParent : MonoBehaviour
         if(gameInformation.gameStarted){
             isSpawning = true;
             yield return new WaitForSeconds(gameInformation.timeTilNewBreach);
-            Debug.Log("hey wtf");
             SpawnHullBreach();
             isSpawning = false;
         }
@@ -87,7 +90,7 @@ public class HullBreachParent : MonoBehaviour
             spawnPointHullBreaches[spawnPoint] = newBreach;
             gameInformation.numberOfHullBreaches++;
 
-            Debug.Log($"Hull breach spawned at {spawnPoint.position}");
+            //Debug.Log($"Hull breach spawned at {spawnPoint.position}");
         }
     }
     public void RemoveHullBreach(GameObject breach)
@@ -103,7 +106,6 @@ public class HullBreachParent : MonoBehaviour
 
         if (spawnPointToRemove != null){
             spawnPointHullBreaches.Remove(spawnPointToRemove);
-            Debug.Log("HEY");
             gameInformation.numberOfHullBreaches--;
         }
     }

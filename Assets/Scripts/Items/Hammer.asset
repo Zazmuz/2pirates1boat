@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a40b708447135fc4883950b44e4db69c, type: 3}
   m_Name: Hammer
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 67a10d858fff5d64693fb132c0ea5615, type: 3}
+  itemSprites:
+  - {fileID: 21300000, guid: 065811e3293e0fc488eabb45e486e12d, type: 3}
+  - {fileID: 21300000, guid: 5eab6d0df24a9bb42bc2e538c1c3d0a7, type: 3}
+  - {fileID: 21300000, guid: 67a10d858fff5d64693fb132c0ea5615, type: 3}
   itemName: Hammer
   itemType: 1
   ActionType: 2
+  durability: 2

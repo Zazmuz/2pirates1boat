@@ -9,6 +9,8 @@ TagManager:
   - Interact
   - Item
   - Death
+  - Enemy
+  - Ship
   layers:
   - Default
   - TransparentFX
@@ -51,6 +53,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 508590313
+    locked: 0
+  - name: Water_in_Boat
+    uniqueID: 2442099499
     locked: 0
   - name: Platforms
     uniqueID: 999611843

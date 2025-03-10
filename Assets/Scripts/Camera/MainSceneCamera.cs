@@ -20,7 +20,7 @@ public class MainSceneCamera : MonoBehaviour
 
         float screenHeight = screenWidth * Screen.height / Screen.width;
 
-        float orthographicSize = screenHeight / 2f;
+        float orthographicSize = screenHeight / 1.35f;
 
         Camera.main.orthographicSize = orthographicSize;
 
