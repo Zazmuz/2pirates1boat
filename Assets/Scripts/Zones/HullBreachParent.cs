@@ -52,7 +52,6 @@ public class HullBreachParent : MonoBehaviour
 
         for (int i = 0; i < gridPositions.Length; i++)
         {
-            Debug.Log("SpawnPoint" + (i + 1));
             GameObject spawnPointObj = new GameObject("SpawnPoint" + (i + 1));
             spawnPointObj.transform.position = gridPositions[i];
             spawnPoints[i] = spawnPointObj.transform;
@@ -63,7 +62,6 @@ public class HullBreachParent : MonoBehaviour
         if(gameInformation.gameStarted){
             isSpawning = true;
             yield return new WaitForSeconds(gameInformation.timeTilNewBreach);
-            Debug.Log("hey wtf");
             SpawnHullBreach();
             isSpawning = false;
         }
@@ -92,7 +90,7 @@ public class HullBreachParent : MonoBehaviour
             spawnPointHullBreaches[spawnPoint] = newBreach;
             gameInformation.numberOfHullBreaches++;
 
-            Debug.Log($"Hull breach spawned at {spawnPoint.position}");
+            //Debug.Log($"Hull breach spawned at {spawnPoint.position}");
         }
     }
     public void RemoveHullBreach(GameObject breach)
@@ -108,7 +106,6 @@ public class HullBreachParent : MonoBehaviour
 
         if (spawnPointToRemove != null){
             spawnPointHullBreaches.Remove(spawnPointToRemove);
-            Debug.Log("HEY");
             gameInformation.numberOfHullBreaches--;
         }
     }
