@@ -8,7 +8,7 @@ using UnityEngine;
 public class Item : ScriptableObject
 {
     [Header("Item Information")]
-    public Sprite itemSprite;
+    public Sprite[] itemSprites;
     public string itemName;
     public ItemType itemType;
     public ActionType ActionType;

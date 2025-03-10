@@ -19,9 +19,6 @@ public class HullBreachZone : ZoneBehaviour
     private float interactionTime;
     private bool hasPlanks;
     
-    private Slider hammerDamageBar;
-    private GameObject hammerDamageBarInstance;
-    public GameObject hammerDamageBarPrefab;
 
     void Awake()
     {
@@ -37,16 +34,6 @@ public class HullBreachZone : ZoneBehaviour
         canvas.enabled = false;
 
         SetZoneSize();
-    }
-
-    void Update()
-    {
-        if (currentPlayerInZone != null && hammerDamageBarInstance != null)
-        {
-            // Update the position of the hammer damage bar to be above the player
-            Vector3 playerPosition = currentPlayerInZone.transform.position;
-            hammerDamageBarInstance.transform.position = playerPosition + new Vector3(0, 1.5f, 0);
-        }
     }
 
     void SetZoneSize()
@@ -65,21 +52,11 @@ public class HullBreachZone : ZoneBehaviour
             progressCoroutine = null;
             ResetProgressBar();
         }
-        if (hammerDamageBarInstance != null)
-        {
-            Destroy(hammerDamageBarInstance);
-        }
     }
 
     public override void UniqueBehaviour(InputManager currentPlayerInput){
         if(currentPlayerInZone == null){
             currentPlayerInZone = currentPlayerInput;
-            // Instantiate the hammer damage bar and attach it to the player
-            hammerDamageBarInstance = Instantiate(hammerDamageBarPrefab);
-            hammerDamageBar = hammerDamageBarInstance.GetComponentInChildren<Slider>();
-            hammerDamageBar.maxValue = 3;
-            hammerDamageBar.value = 3; // Initialize hammer damage bar value
-            hammerDamageBarInstance.SetActive(true);
         }
 
         playerItemManager = currentPlayerInput.GetComponentInParent<PlayerItemManager>();
@@ -118,13 +95,12 @@ public class HullBreachZone : ZoneBehaviour
         float elapsedTime = 0f;
         progressBar.value = 0f;
         interactionTime = zoneStats.interactionTime;
-        Debug.Log("start fill progress bar");
+        //Debug.Log("start fill progress bar");
         while (elapsedTime < interactionTime){
             elapsedTime += Time.deltaTime;
             progressBar.value = elapsedTime / interactionTime;
             yield return null;
         }
-        Debug.Log("asdqwe");
 
         progressBar.enabled = false;
 
@@ -132,10 +108,6 @@ public class HullBreachZone : ZoneBehaviour
         if (playerItemManager.GetHeldItem() != null)
         {
             playerItemManager.UseItem();
-            if (hammerDamageBar != null)
-            {
-                hammerDamageBar.value = playerItemManager.GetHeldItem().durability;
-            }
         }
 
         // Remove the hull breach
