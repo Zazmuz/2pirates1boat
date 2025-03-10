@@ -11,6 +11,8 @@ public class ItemController : MonoBehaviour
     }
     void Update(){
         if(inputManager.InteractWasPressed && itemInRange != null){
+            Debug.Log("Interacting with item " + itemInRange.GetItem().itemName);
+            playerItemManager.InitializeItem(itemInRange.GetItem());
             playerItemManager.AddItemToInventory(itemInRange.GetItem());
         }
 

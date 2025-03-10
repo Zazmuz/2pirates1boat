@@ -9,22 +9,21 @@ public class HullBreachParent : MonoBehaviour
     public GameInformation gameInformation;
     public GameObject hullBreachZone;
     private bool isSpawning = false;
-
     private Dictionary<Transform, GameObject> spawnPointHullBreaches = new Dictionary<Transform, GameObject>();
 
     // Start is called before the first frame update
     void Start(){
         gameInformation.numberOfHullBreaches = 0;
-        gameInformation.maxHullBreaches = 5;
 
         InitializeSpawnPoints();
     }
 
     void Update(){
-        if (gameInformation.isSpawningHullBreaches && !isSpawning){
+        if (gameInformation.isSpawningHullBreaches && gameInformation.gameStarted && !isSpawning){
             StartCoroutine(TimeToSpawnNewHullBreach());
         }
         if(gameInformation.atDestination){
+            StopCoroutine(TimeToSpawnNewHullBreach());
             RemoveAllBreaches();
         }
     }
@@ -37,30 +36,37 @@ public class HullBreachParent : MonoBehaviour
             return;
         }
 
-        spawnPoints = new Transform[5];
 
         Vector3[] gridPositions = { //this is insane, fuckugly pos can someone do this clean would be sick.
             new Vector3(-11.5f, 1, 0),
             new Vector3(5.5f, 0, 0),
             new Vector3(-11.5f, -4, 0),
             new Vector3(5.5f, -4, 0),
-            new Vector3(-6.5f, -4, 0)
+            new Vector3(-6.5f, -4, 0),
+            new Vector3(-15f, 5f, 0),
+            new Vector3(-7f, 1f, 0)
         };
+
+        spawnPoints = new Transform[gridPositions.Length];
+
 
         for (int i = 0; i < gridPositions.Length; i++)
         {
+            Debug.Log("SpawnPoint" + (i + 1));
             GameObject spawnPointObj = new GameObject("SpawnPoint" + (i + 1));
             spawnPointObj.transform.position = gridPositions[i];
             spawnPoints[i] = spawnPointObj.transform;
         }
     }
 
-    private IEnumerator TimeToSpawnNewHullBreach()
-    {
-        isSpawning = true;
-        yield return new WaitForSeconds(gameInformation.timeTilNewBreach);
-        SpawnHullBreach();
-        isSpawning = false;
+    private IEnumerator TimeToSpawnNewHullBreach(){
+        if(gameInformation.gameStarted){
+            isSpawning = true;
+            yield return new WaitForSeconds(gameInformation.timeTilNewBreach);
+            Debug.Log("hey wtf");
+            SpawnHullBreach();
+            isSpawning = false;
+        }
     }
 
     void SpawnHullBreach()

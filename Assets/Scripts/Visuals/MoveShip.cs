@@ -1,12 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveShip : MonoBehaviour
 {
     public Grid grid;
     public GameInformation gameInformation;
-     IEnumerator MoveGridOut(Vector2 startGridPos, Vector2 targetGridPos, float duration)
+
+    public delegate void ShipMovementComplete();
+    public event ShipMovementComplete OnShipMovementComplete;
+
+    private IEnumerator MoveGridOut(Vector2 startGridPos, Vector2 targetGridPos, float duration)
     {
         grid.transform.position = startGridPos;
         
@@ -23,7 +26,7 @@ public class MoveShip : MonoBehaviour
         while (elapsedTime < duration)
         {
             float t = elapsedTime / duration;
-            t = t * t; // Quadratic easing for acceleration effect
+            t = Mathf.SmoothStep(0, 1, t);
             Vector2 newGridPos = Vector2.Lerp(startGridPos, targetGridPos, t);
             grid.transform.position = newGridPos;
 
@@ -36,21 +39,13 @@ public class MoveShip : MonoBehaviour
             yield return null;
         }
         
-        gameInformation.timeToGame = true;
         grid.transform.position = targetGridPos;
-        
+        OnShipMovementComplete?.Invoke();
     }
-    public void Move(Vector2 from, Vector2 to, float duration){
-        AttachPlayersToGrid();
+
+    public void Move(Vector2 from, Vector2 to, float duration)
+    {
         FindObjectOfType<HullBreachParent>().RemoveAllBreaches();
         StartCoroutine(MoveGridOut(from, to, duration));
     }
-
-    void AttachPlayersToGrid(){
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject player in players){
-            player.transform.SetParent(grid.transform);
-        }
-    }
-
 }

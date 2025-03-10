@@ -10,6 +10,8 @@ TagManager:
   - Item
   - Death
   - Enemy
+=======
+  - Ship
   layers:
   - Default
   - TransparentFX

@@ -6,6 +6,7 @@ public class PlayerSelectSpawn : MonoBehaviour
     public PlayerInformation player2;
     public Transform playerOneSpawn;
     public Transform playerTwoSpawn;
+    
 
     void Start(){
         player1.posX = playerOneSpawn.position.x;

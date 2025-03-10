@@ -69,7 +69,7 @@ public class SharedDeviceInputManager : PlayerInputManager
         /// <param name="obj"></param>
         private void RebindPlayer(PlayerInput obj)
         {
-            Debug.Log(playerIndex);
+            //Debug.Log(playerIndex);
             obj.SwitchCurrentControlScheme(controlSchemes[playerIndex], Keyboard.current);
             playerIndex++;
             
